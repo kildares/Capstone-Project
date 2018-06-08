@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">FutMatcher</string>
+
+    <string name="tv_main_title">Registered Matches</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="text_match_title">Match Name</string>
+    <string name="text_match_location">Match Location</string>
+    <string name="text_match_date">Match Date</string>
+    <string name="text_match_num_players">N° players</string>
+    <string name="button_create">Create</string>
+    <string name="hint_title">Match name</string>
+    <string name="hint_match_location">Match Location</string>
+
+</resources>
