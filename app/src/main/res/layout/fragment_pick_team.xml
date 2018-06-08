@@ -1,0 +1,123 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="futmatcher.kildare.com.futmatcher.PickTeamFragment">
+
+    <TextView
+        android:id="@+id/tv_pick_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_blank_fragment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <RadioGroup
+        android:id="@+id/rg_pick_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pick_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/bt_pick_team"
+        >
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/bt_pick_team"
+        android:text="@string/button_pick_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pick_title"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/rg_pick_order"
+    />
+
+    <TextView
+        android:id="@+id/tv_team1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_pick_team1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_pick_team"
+        app:layout_constraintBottom_toTopOf="@+id/rv_team1"
+        app:layout_constraintRight_toLeftOf="@id/tv_team2"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_team1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_team1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/rv_team2"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_team2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_pick_team2"
+        app:layout_constraintLeft_toRightOf="@+id/tv_team1"
+        app:layout_constraintTop_toBottomOf="@+id/bt_pick_team"
+        app:layout_constraintBottom_toTopOf="@+id/rv_team1"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_team2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_team2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/rv_team1"
+        />
+
+    <TextView
+        android:id="@+id/tv_reserve1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_reserve_team1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_team1"
+        app:layout_constraintBottom_toTopOf="@+id/rv_reserve1"
+        app:layout_constraintRight_toLeftOf="@+id/tv_reserve2"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_reserve1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reserve1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/rv_reserve2"
+        />
+
+    <TextView
+        android:id="@+id/tv_reserve2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_pick_team2"
+        app:layout_constraintLeft_toRightOf="@+id/tv_reserve1"
+        app:layout_constraintTop_toBottomOf="@+id/rv_team2"
+        app:layout_constraintBottom_toTopOf="@+id/rv_reserve2"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_reserve2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reserve2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/rv_reserve1"
+        />
+
+</android.support.constraint.ConstraintLayout>
