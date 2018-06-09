@@ -1,5 +1,8 @@
 package futmatcher.kildare.com.futmatcher.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by kilda on 6/9/2018.
  */
@@ -12,7 +15,7 @@ public class Match {
     private String NumPlayers;
     private String MinPlayers;
     private String MaxPlayers;
-
+    private List<Player> Players;
 
     public Match(String title,String location,String date,String numPlayers,String minPlayers,String maxPlayers)
     {
@@ -22,8 +25,19 @@ public class Match {
         this.NumPlayers=numPlayers;
         this.MinPlayers=minPlayers;
         this.MaxPlayers=maxPlayers;
+        Players = new ArrayList<>();
     }
 
+    public Match(String title,String location,String date,String numPlayers,String minPlayers,String maxPlayers,List<Player> players)
+    {
+        this.Title=title;
+        this.Location=location;
+        this.Date=date;
+        this.NumPlayers=numPlayers;
+        this.MinPlayers=minPlayers;
+        this.MaxPlayers=maxPlayers;
+        Players = players;
+    }
 
     public String getTitle() {
         return Title;
@@ -71,5 +85,13 @@ public class Match {
 
     public void setMaxPlayers(String maxPlayers) {
         MaxPlayers = maxPlayers;
+    }
+
+    public List<Player> getPlayers() {
+        return Players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        Players = players;
     }
 }

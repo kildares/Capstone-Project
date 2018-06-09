@@ -1,6 +1,5 @@
 package futmatcher.kildare.com.futmatcher.persistence;
 
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -45,7 +44,7 @@ public class FutMatcherFirebaseDatabase {
     {
         if(futMatcherFirebaseDatabase == null){
             futMatcherFirebaseDatabase = new FutMatcherFirebaseDatabase();
-            return futMatcherFirebaseDatabase
+            return futMatcherFirebaseDatabase;
         }
         else
             return futMatcherFirebaseDatabase;
@@ -53,8 +52,7 @@ public class FutMatcherFirebaseDatabase {
 
     public void addMatch(Match match)
     {
-        String titleHash = Integer.toString(match.getTitle().hashCode());
-        DatabaseReference reference = Database.getReference(ROOT_REFERENCE + titleHash);
+        DatabaseReference reference = Database.getReference(ROOT_REFERENCE + match.getTitle());
         reference.setValue(match);
     }
 

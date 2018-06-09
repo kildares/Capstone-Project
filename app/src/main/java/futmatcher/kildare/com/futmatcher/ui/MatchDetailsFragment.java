@@ -1,4 +1,4 @@
-package futmatcher.kildare.com.futmatcher;
+package futmatcher.kildare.com.futmatcher.ui;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,16 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import futmatcher.kildare.com.futmatcher.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CreateMatchFragment.OnFragmentInteractionListener} interface
+ * {@link MatchDetailsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link CreateMatchFragment#newInstance} factory method to
+ * Use the {@link MatchDetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateMatchFragment extends Fragment {
+public class MatchDetailsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +31,7 @@ public class CreateMatchFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public CreateMatchFragment() {
+    public MatchDetailsFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +41,11 @@ public class CreateMatchFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateMatchFragment.
+     * @return A new instance of fragment MatchDetailsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CreateMatchFragment newInstance(String param1, String param2) {
-        CreateMatchFragment fragment = new CreateMatchFragment();
+    public static MatchDetailsFragment newInstance(String param1, String param2) {
+        MatchDetailsFragment fragment = new MatchDetailsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +66,7 @@ public class CreateMatchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_match, container, false);
+        return inflater.inflate(R.layout.fragment_match_details, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

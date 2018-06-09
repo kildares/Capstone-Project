@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="futmatcher.kildare.com.futmatcher.PickTeamFragment">
+    tools:context="futmatcher.kildare.com.futmatcher.ui.PickTeamFragment">
 
     <TextView
         android:id="@+id/tv_pick_title"
