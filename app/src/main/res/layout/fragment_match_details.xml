@@ -11,25 +11,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        tools:text="@string/hello_blank_fragment" />
+        tools:text="@string/dummy_text" />
 
     <TextView
         android:id="@+id/tv_detail_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="@string/hello_blank_fragment" />
+        tools:text="@string/dummy_text" />
 
     <TextView
         android:id="@+id/tv_detail_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="@string/hello_blank_fragment" />
+        tools:text="@string/dummy_text" />
 
     <TextView
         android:id="@+id/tv_detail_players"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="@string/hello_blank_fragment" />
+        tools:text="@string/dummy_text" />
     
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

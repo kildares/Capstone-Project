@@ -15,7 +15,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/tv_match_title"
-        tools:text="@string/hello_blank_fragment" />
+        tools:text="@string/dummy_text" />
 
     <TextView
         android:id="@+id/tv_match_title"

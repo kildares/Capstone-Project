@@ -1,11 +1,20 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="FutTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorPrimaryLight</item>
+        <item name="android:textSize">@dimen/textSize</item>
+    </style>
+
+
+    <style name="TitleFutTheme" parent = "FutTheme">
+        <item name="android:textSize">@dimen/titleTextSize</item>
+        <item name="android:layout_marginTop">@dimen/marginSize</item>
+        <item name="android:layout_marginLeft">@dimen/marginSize</item>
+        <item name="android:layout_marginRight">@dimen/marginSize</item>
+        <item name="android:layout_marginBottom">@dimen/marginSize</item>
     </style>
 
 </resources>

@@ -1,0 +1,43 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tv_main_title"
+        android:text="@string/tv_main_title"
+        android:textAlignment="center"
+        android:layout_weight="1"
+        style="@style/TitleFutTheme"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_match_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:elevation="6dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_create_match"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="24dp"
+            />
+
+    </FrameLayout>
+
+
+
+</LinearLayout>
