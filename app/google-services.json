@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "654925035682",
+    "firebase_url": "https://futmatcher.firebaseio.com",
+    "project_id": "futmatcher",
+    "storage_bucket": "futmatcher.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654925035682:android:b0ff8d225a6336cf",
+        "android_client_info": {
+          "package_name": "futmatcher.kildare.com.futmatcher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654925035682-u47ijsbeolk42jka38chg6uqmae0ppbc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "futmatcher.kildare.com.futmatcher",
+            "certificate_hash": "eacb92cdb148bc2da8848777d3078d1ce1015c58"
+          }
+        },
+        {
+          "client_id": "654925035682-96r9c2kvg50j7rn80hceo2lmn7tn3h7m.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "654925035682-96r9c2kvg50j7rn80hceo2lmn7tn3h7m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1eyOI2oUd8smpU8siLpy_YyJ4BPSlUYU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654925035682-96r9c2kvg50j7rn80hceo2lmn7tn3h7m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
