@@ -6,26 +6,33 @@
     tools:context="futmatcher.kildare.com.futmatcher.ui.CreateMatchFragment"
     android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tv_create_title"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_create_match"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/ToolbarFutTheme"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/tv_match_title"
-        tools:text="@string/dummy_text" />
+        app:layout_constraintBottom_toTopOf="@+id/et_match_title"
+        >
+
+        <TextView
+            android:text="@string/text_create_match_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TitleFutTheme"
+            />
+
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:id="@+id/tv_match_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_match_title"
+        app:layout_constraintTop_toBottomOf="@+id/tb_create_match"
+        app:layout_constraintBottom_toTopOf="@+id/et_match_title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_title"
-        app:layout_constraintBottom_toTopOf="@+id/et_match_title"
         />
     
     <EditText
@@ -33,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_match_title"
+        app:layout_constraintTop_toBottomOf="@+id/tb_create_match"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/tv_match_location"

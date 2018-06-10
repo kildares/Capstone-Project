@@ -15,6 +15,6 @@
     <string name="hint_title">Match name</string>
     <string name="hint_match_location">Match Location</string>
 
+    <string name="text_create_match_title">Create Match</string>
     <string name="dummy_text">DUMMY TEXT</string>
-
 </resources>

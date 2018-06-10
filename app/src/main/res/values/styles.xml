@@ -1,11 +1,12 @@
 <resources>
 
-    <style name="FutTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="FutTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/colorPrimaryLight</item>
         <item name="android:textSize">@dimen/textSize</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
 
@@ -15,6 +16,14 @@
         <item name="android:layout_marginLeft">@dimen/marginSize</item>
         <item name="android:layout_marginRight">@dimen/marginSize</item>
         <item name="android:layout_marginBottom">@dimen/marginSize</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="ToolbarFutTheme" parent = "FutTheme">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/titleTextSize</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
 
 </resources>
