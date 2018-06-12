@@ -5,13 +5,20 @@
     tools:context="futmatcher.kildare.com.futmatcher.ui.MatchDetailsFragment"
     android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tv_detail_title"
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        tools:text="@string/dummy_text" />
+        style="@style/ToolbarFutTheme"
+        >
+        <TextView
+            android:id="@+id/tv_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/text_detail_match_title"
+            style="@style/TitleFutTheme"
+            />
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:id="@+id/tv_detail_location"
@@ -46,6 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="@string/button_add_player"
             />
 
         <Button
@@ -53,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="@string/button_pick_team"
             />
 
     </LinearLayout>

@@ -5,39 +5,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="futmatcher.kildare.com.futmatcher.ui.PickTeamFragment">
 
-    <TextView
-        android:id="@+id/tv_pick_title"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_pick_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dummy_text"
+        style="@style/ToolbarFutTheme"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
-
-    <RadioGroup
-        android:id="@+id/rg_pick_order"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_pick_title"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/bt_pick_team"
+        app:layout_constraintBottom_toTopOf="@+id/tv_team1"
         >
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RadioGroup>
+        <TextView
+            android:id="@+id/tv_pick_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_pick_team_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            style="@style/TitleFutTheme"
+            />
 
-    <Button
-        android:id="@+id/bt_pick_team"
-        android:text="@string/button_pick_team"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_pick_title"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/rg_pick_order"
-    />
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:id="@+id/tv_team1"
@@ -45,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="@string/text_pick_team1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_pick_team"
+        app:layout_constraintTop_toBottomOf="@+id/tb_pick_title"
         app:layout_constraintBottom_toTopOf="@+id/rv_team1"
         app:layout_constraintRight_toLeftOf="@id/tv_team2"
         />
@@ -66,7 +54,7 @@
         android:layout_height="wrap_content"
         android:text="@string/text_pick_team2"
         app:layout_constraintLeft_toRightOf="@+id/tv_team1"
-        app:layout_constraintTop_toBottomOf="@+id/bt_pick_team"
+        app:layout_constraintTop_toBottomOf="@+id/tb_pick_title"
         app:layout_constraintBottom_toTopOf="@+id/rv_team1"
         app:layout_constraintRight_toRightOf="parent"
         />
@@ -119,5 +107,33 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/rv_reserve1"
         />
+
+    <RadioGroup
+        android:id="@+id/rg_pick_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/rv_reserve2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/bt_pick_team"
+        >
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/bt_pick_team"
+        android:text="@string/button_pick_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/rv_reserve2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/rg_pick_order"
+        />
+
 
 </android.support.constraint.ConstraintLayout>
