@@ -20,4 +20,7 @@
     <string name="text_detail_match_title">Match Details</string>
     <string name="button_add_player">Add Player</string>
     <string name="dummy_text">DUMMY TEXT</string>
+
+    <string name="text_min_players">Min Players</string>
+    <string name="text_max_players">Max Players</string>
 </resources>

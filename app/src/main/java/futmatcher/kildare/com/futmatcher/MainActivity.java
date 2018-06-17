@@ -3,6 +3,7 @@ package futmatcher.kildare.com.futmatcher;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import futmatcher.kildare.com.futmatcher.ui.MatchListFragment;
 
 public class MainActivity extends AppCompatActivity implements MatchListFragment.CreateMatchButton {
@@ -36,4 +37,5 @@ public class MainActivity extends AppCompatActivity implements MatchListFragment
     {
 
     }
+
 }

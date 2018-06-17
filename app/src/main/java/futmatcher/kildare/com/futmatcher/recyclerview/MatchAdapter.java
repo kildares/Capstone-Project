@@ -23,8 +23,9 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
     List<Match> Matches;
     Context mContext;
 
-    public MatchAdapter(Context context)
+    public MatchAdapter(Context context, List<Match> matches)
     {
+        Matches = matches;
         mContext = context;
     }
 

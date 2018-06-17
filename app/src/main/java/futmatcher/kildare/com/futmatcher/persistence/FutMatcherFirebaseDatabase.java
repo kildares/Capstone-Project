@@ -1,12 +1,16 @@
 package futmatcher.kildare.com.futmatcher.persistence;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
 
 import futmatcher.kildare.com.futmatcher.model.Match;
 
@@ -14,30 +18,22 @@ import futmatcher.kildare.com.futmatcher.model.Match;
  * Created by kilda on 6/9/2018.
  */
 
-public class FutMatcherFirebaseDatabase {
+public class FutMatcherFirebaseDatabase implements ChildEventListener {
 
     private static FutMatcherFirebaseDatabase futMatcherFirebaseDatabase;
 
-    private FirebaseDatabase Database;
-    private DatabaseReference DatabaseReference;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mDatabaseReference;
 
-    private static final String ROOT_REFERENCE = "matches/";
+    private static final String ROOT_REFERENCE = "matches";
 
     private FutMatcherFirebaseDatabase()
     {
-        Database = FirebaseDatabase.getInstance();
-        DatabaseReference = Database.getReference(ROOT_REFERENCE);
-        DatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        mDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mDatabase.getReference(ROOT_REFERENCE);
 
-            }
+        mDatabaseReference.addChildEventListener(this);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
     public static FutMatcherFirebaseDatabase getInstance()
@@ -50,13 +46,33 @@ public class FutMatcherFirebaseDatabase {
             return futMatcherFirebaseDatabase;
     }
 
-    public void addMatch(Match match)
+     public void addMatch(Match match)
     {
-        DatabaseReference reference = Database.getReference(ROOT_REFERENCE + match.getTitle());
-        reference.setValue(match);
+        mDatabaseReference.child(match.getTitle()).setValue(match);
     }
 
+    @Override
+    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+        //Match match = dataSnapshot.getValue();
+    }
 
+    @Override
+    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+    }
 
+    @Override
+    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+    }
+
+    @Override
+    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+    }
 }

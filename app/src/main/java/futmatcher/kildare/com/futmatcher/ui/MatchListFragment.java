@@ -8,18 +8,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
+import futmatcher.kildare.com.futmatcher.FutMatcherAsyncTask;
 import futmatcher.kildare.com.futmatcher.R;
+import futmatcher.kildare.com.futmatcher.model.Match;
+import futmatcher.kildare.com.futmatcher.recyclerview.MatchAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MatchListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MatchListFragment extends Fragment{
+public class MatchListFragment extends Fragment implements FutMatcherAsyncTask.LoadedMatchListData {
 
-    RecyclerView mRVMatches;
-    FloatingActionButton mFab;
-    CreateMatchButton mListener;
+    private RecyclerView mRVMatches;
+    private FloatingActionButton mFab;
+    private CreateMatchButton mListener;
+    private FutMatcherAsyncTask mAsyncTask;
+    private MatchAdapter mAdapter;
 
     public MatchListFragment() {
         // Required empty public constructor
@@ -31,7 +38,6 @@ public class MatchListFragment extends Fragment{
      *
      * @return A new instance of fragment MatchListFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static MatchListFragment newInstance(CreateMatchButton listener) {
         MatchListFragment fragment = new MatchListFragment();
 
@@ -64,8 +70,16 @@ public class MatchListFragment extends Fragment{
             }
         });
 
+
         return view;
     }
+
+    @Override
+    public void onLoadedMatchListData(List<Match> matchList) {
+        mAdapter = new MatchAdapter(getActivity(), matchList);
+        mRVMatches.setAdapter(mAdapter);
+    }
+
 
     public void addCreateMatchButtonListener(CreateMatchButton listener){
         mListener = listener;
@@ -73,6 +87,8 @@ public class MatchListFragment extends Fragment{
 
     public interface CreateMatchButton{
         void onCreateMatchButtonPressed();
+
     }
+
 
 }

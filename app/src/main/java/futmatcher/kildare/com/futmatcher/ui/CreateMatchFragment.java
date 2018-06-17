@@ -7,8 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import futmatcher.kildare.com.futmatcher.R;
+import futmatcher.kildare.com.futmatcher.model.Match;
+import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
 
 
 /**
@@ -17,6 +22,14 @@ import futmatcher.kildare.com.futmatcher.R;
  * create an instance of this fragment.
  */
 public class CreateMatchFragment extends Fragment {
+
+    Button mCreateButton;
+    EditText mMatchTitle;
+    EditText mMatchDate;
+    EditText mMatchLocation;
+    EditText mMinPlayers;
+    EditText mMaxPlayers;
+    Spinner mNumPlayers;
 
     public CreateMatchFragment() {
         // Required empty public constructor
@@ -46,12 +59,62 @@ public class CreateMatchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_match, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_create_match, container, false);
+
+        mCreateButton =  view.findViewById(R.id.bt_create_match);
+
+        mMatchTitle = view.findViewById(R.id.et_match_title);
+        mMatchLocation = view.findViewById(R.id.et_match_location);
+        mMatchDate = view.findViewById(R.id.et_match_date);
+        mMaxPlayers = view.findViewById(R.id.et_max_players);
+        mMinPlayers = view.findViewById(R.id.et_min_players);
+        mNumPlayers = view.findViewById(R.id.sp_num_players);
+
+        mCreateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String title = mMatchTitle.getText().toString();
+                String location = mMatchLocation.getText().toString();
+                String date = mMatchDate.getText().toString();
+                if(!title.isEmpty() && !location.isEmpty() && !date.isEmpty() && isValidMinPlayers() && isValidMaxPlayers())
+                    createMatch();
+            }
+        });
+
+        return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public boolean isValidMaxPlayers()
+    {
+        Integer num = Integer.parseInt(mNumPlayers.getSelectedItem().toString());
+        Integer maxPlayers = Integer.parseInt(mMaxPlayers.getText().toString());
+        Integer minPlayers = Integer.parseInt(mMinPlayers.getText().toString());
+
+        return maxPlayers >= num && maxPlayers >= minPlayers;
     }
+
+    public boolean isValidMinPlayers()
+    {
+        Integer num = Integer.parseInt(mNumPlayers.getSelectedItem().toString());
+        Integer minPlayers = Integer.parseInt(mMinPlayers.getText().toString());
+        return minPlayers <= (2*num);
+    }
+
+    public void createMatch()
+    {
+        String title = mMatchTitle.getText().toString();
+        String location = mMatchLocation.getText().toString();
+        String date = mMatchDate.getText().toString();
+        String maxPlayers = mMaxPlayers.getText().toString();
+        String minPlayers = mMinPlayers.getText().toString();
+        Match match = new Match(title, location, date, mNumPlayers.getSelectedItem().toString(), minPlayers, maxPlayers);
+
+        FutMatcherFirebaseDatabase firebaseDatabase = FutMatcherFirebaseDatabase.getInstance();
+        firebaseDatabase.addMatch(match);
+
+    }
+
 
 }
