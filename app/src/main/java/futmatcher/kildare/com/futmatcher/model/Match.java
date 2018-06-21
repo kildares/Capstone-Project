@@ -17,6 +17,11 @@ public class Match {
     private String MaxPlayers;
     private List<Player> Players;
 
+    public Match()
+    {
+
+    }
+
     public Match(String title,String location,String date,String numPlayers,String minPlayers,String maxPlayers)
     {
         this.Title=title;

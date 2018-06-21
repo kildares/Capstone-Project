@@ -7,7 +7,7 @@
         <item name="android:colorBackground">@color/colorPrimaryLight</item>
         <item name="android:textSize">@dimen/textSize</item>
         <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
 
@@ -19,7 +19,7 @@
         <item name="android:layout_marginBottom">@dimen/marginSize</item>
         <item name="android:textAlignment">center</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
-        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
     <style name="ToolbarFutTheme" parent = "FutTheme">

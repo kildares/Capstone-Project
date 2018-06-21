@@ -23,4 +23,8 @@
 
     <string name="text_min_players">Min Players</string>
     <string name="text_max_players">Max Players</string>
+
+    <string name="rv_title">Match:</string>
+    <string name="rv_date">Date:</string>
+    <string name="rv_location">Location:</string>
 </resources>
