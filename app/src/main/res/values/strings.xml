@@ -27,4 +27,8 @@
     <string name="rv_title">Match:</string>
     <string name="rv_date">Date:</string>
     <string name="rv_location">Location:</string>
+
+    <string name="text_title_detail_player">Players List</string>
+    <string name="bndl_match">BUNDLE_MATCH</string>
+
 </resources>

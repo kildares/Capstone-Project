@@ -27,11 +27,13 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
 
     List<Match> Matches;
     Context mContext;
+    OnMatchItemClickListener mListener;
 
-    public MatchAdapter(Context context, List<Match> matches)
+    public MatchAdapter(Context context, List<Match> matches, OnMatchItemClickListener listener)
     {
         Matches = matches;
         mContext = context;
+        mListener = listener;
     }
 
     @NonNull
@@ -49,6 +51,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         holder.MatchTitle.setText(mContext.getString(R.string.rv_title)+ " " + Matches.get(position).getTitle());
         holder.MatchDate.setText(mContext.getString(R.string.rv_date)+ " " + Matches.get(position).getDate());
         holder.MatchLocation.setText(mContext.getString(R.string.rv_location)+ " " + Matches.get(position).getLocation());
+
     }
 
     @Override
@@ -118,7 +121,30 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
             MatchTitle = view.findViewById(R.id.tv_list_match_title);
             MatchLocation = view.findViewById(R.id.tv_list_match_location);
             MatchDate = view.findViewById(R.id.tv_list_match_date);
+
+
+            view.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    Toast.makeText(mContext, "Position " + Integer.toString(position), Toast.LENGTH_SHORT).show();
+                    if(mListener != null){
+                        mListener.onClickMatchItem(Matches.get(position));
+                    }
+
+                }
+            });
+
         }
+
+
     }
+
+    public interface OnMatchItemClickListener
+    {
+        void onClickMatchItem(Match match);
+    }
+
 
 }

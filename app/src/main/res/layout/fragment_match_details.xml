@@ -38,7 +38,8 @@
         android:layout_height="wrap_content"
         tools:text="@string/dummy_text" />
     
-    <android.support.v7.widget.RecyclerView
+    <ListView
+        android:id="@+id/lv_players"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

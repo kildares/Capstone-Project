@@ -1,5 +1,6 @@
 package futmatcher.kildare.com.futmatcher.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -11,9 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import futmatcher.kildare.com.futmatcher.FutMatcherAsyncTask;
 import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.model.Match;
 import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
@@ -24,12 +23,11 @@ import futmatcher.kildare.com.futmatcher.recyclerview.MatchAdapter;
  * Use the {@link MatchListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MatchListFragment extends Fragment {
+public class MatchListFragment extends Fragment implements MatchAdapter.OnMatchItemClickListener {
 
     private RecyclerView mRVMatches;
     private FloatingActionButton mFab;
-    private CreateMatchButton mListener;
-    private FutMatcherAsyncTask mAsyncTask;
+    private MatchListFragmentInteraction mListener;
     private MatchAdapter mAdapter;
 
     public MatchListFragment() {
@@ -42,10 +40,8 @@ public class MatchListFragment extends Fragment {
      *
      * @return A new instance of fragment MatchListFragment.
      */
-    public static MatchListFragment newInstance(CreateMatchButton listener) {
+    public static MatchListFragment newInstance(MatchListFragmentInteraction listener) {
         MatchListFragment fragment = new MatchListFragment();
-
-        fragment.addCreateMatchButtonListener(listener);
 
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -82,19 +78,33 @@ public class MatchListFragment extends Fragment {
 
         mRVMatches.setLayoutManager(layoutManager);
 
-        mAdapter = new MatchAdapter(getActivity(), new ArrayList<Match>());
+        mAdapter = new MatchAdapter(getActivity(), new ArrayList<Match>(), this);
         FutMatcherFirebaseDatabase.getInstance().addChildEventListenerToReference(mAdapter);
         mRVMatches.setAdapter(mAdapter);
         return view;
     }
 
-    public void addCreateMatchButtonListener(CreateMatchButton listener){
-        mListener = listener;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if(context instanceof MatchListFragmentInteraction){
+            mListener = (MatchListFragmentInteraction) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                + " must implement MatchListFragmentInteraction");
+        }
     }
 
-    public interface CreateMatchButton{
-        void onCreateMatchButtonPressed();
+    @Override
+    public void onClickMatchItem(Match match) {
+        if(mListener != null)
+            mListener.onClickMatchItem(match);
+    }
 
+    public interface MatchListFragmentInteraction{
+        void onCreateMatchButtonPressed();
+        void onClickMatchItem(Match match);
     }
 
 

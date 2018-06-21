@@ -1,13 +1,20 @@
 package futmatcher.kildare.com.futmatcher.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import paperparcel.PaperParcel;
 
 /**
  * Created by kilda on 6/9/2018.
  */
+@PaperParcel
+public class Match implements Parcelable {
 
-public class Match {
+    public static final Creator<Match> CREATOR = PaperParcelMatch.CREATOR;
 
     private String Title;
     private String Location;
@@ -42,6 +49,15 @@ public class Match {
         this.MinPlayers=minPlayers;
         this.MaxPlayers=maxPlayers;
         Players = players;
+    }
+
+    protected Match(Parcel in) {
+        Title = in.readString();
+        Location = in.readString();
+        Date = in.readString();
+        NumPlayers = in.readString();
+        MinPlayers = in.readString();
+        MaxPlayers = in.readString();
     }
 
     public String getTitle() {
@@ -98,5 +114,15 @@ public class Match {
 
     public void setPlayers(List<Player> players) {
         Players = players;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        PaperParcelMatch.writeToParcel(this, parcel, i);
     }
 }
