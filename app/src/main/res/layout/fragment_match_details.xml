@@ -50,7 +50,7 @@
         >
 
         <Button
-            android:id="@+id/bt_add"
+            android:id="@+id/bt_add_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

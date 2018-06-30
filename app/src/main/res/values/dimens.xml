@@ -9,4 +9,7 @@
     <dimen name="rv_title_size">16sp</dimen>
     <dimen name="rv_date_size">14sp</dimen>
     <dimen name="rv_location_size">14sp</dimen>
+
+    <dimen name="alert_dialog_width">300dp</dimen>
+
 </resources>

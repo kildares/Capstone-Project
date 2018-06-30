@@ -31,4 +31,9 @@
     <string name="text_title_detail_player">Players List</string>
     <string name="bndl_match">BUNDLE_MATCH</string>
 
+    <string name="alert_hint_player_name">"John Doe"</string>
+    <string name="alert_add_title">Add a player</string>
+    <string name="alert_add_positive">Add</string>
+    <string name="alert_add_negative">Cancel</string>
+
 </resources>

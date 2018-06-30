@@ -16,6 +16,11 @@ public class Player implements Parcelable{
     private String Name;
     private String Position;
 
+    public Player()
+    {
+
+    }
+
     public Player(String Name, String Position)
     {
         this.Name = Name;

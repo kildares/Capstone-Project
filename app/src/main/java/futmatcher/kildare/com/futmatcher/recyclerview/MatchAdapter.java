@@ -23,7 +23,7 @@ import futmatcher.kildare.com.futmatcher.model.Match;
  * Created by kilda on 6/9/2018.
  */
 
-public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHolder> implements ChildEventListener {
+public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHolder>{
 
     List<Match> Matches;
     Context mContext;
@@ -62,21 +62,14 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
             return Matches.size();
     }
 
-
-    @Override
-    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-        Match match = dataSnapshot.getValue(Match.class);
+    public void addMatch(Match match)
+    {
         Matches.add(match);
         notifyDataSetChanged();
-
-        Toast.makeText(mContext,"onChildAdded",Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-        Match match = dataSnapshot.getValue(Match.class);
+    public void updateMatch(Match match)
+    {
         for(int i = 0 ; i < Matches.size() ; i++){
             if(Matches.get(i).getTitle().equals(match.getTitle())){
                 Matches.remove(i);
@@ -84,29 +77,14 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
                 break;
             }
         }
-
-        Toast.makeText(mContext,"onChildChanged",Toast.LENGTH_LONG).show();
+        notifyDataSetChanged();
     }
 
-    @Override
-    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-        Match match = dataSnapshot.getValue(Match.class);
+    public void removeMatch(Match match)
+    {
         Matches.remove(match);
-
-        Toast.makeText(mContext,"onChildRemoved",Toast.LENGTH_LONG).show();
+        notifyDataSetChanged();
     }
-
-    @Override
-    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-        Toast.makeText(mContext,"onChildMoved",Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onCancelled(@NonNull DatabaseError databaseError) {
-        Toast.makeText(mContext,"onCancelled",Toast.LENGTH_LONG).show();
-    }
-
 
     public class MatchViewHolder extends RecyclerView.ViewHolder{
 
@@ -132,7 +110,6 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
                     if(mListener != null){
                         mListener.onClickMatchItem(Matches.get(position));
                     }
-
                 }
             });
 

@@ -5,4 +5,13 @@
         <item>7</item>
         <item>5</item>
     </string-array>
+
+    <string-array name="player_position">
+        <item>Goal</item>
+        <item>Defense</item>
+        <item>Midfield</item>
+        <item>Left Side</item>
+        <item>Right Side</item>
+        <item>Attack</item>
+    </string-array>
 </resources>

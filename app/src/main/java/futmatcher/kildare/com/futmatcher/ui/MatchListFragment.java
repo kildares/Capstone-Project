@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import futmatcher.kildare.com.futmatcher.FirebaseChildEventListener;
 import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.model.Match;
 import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
@@ -77,9 +78,12 @@ public class MatchListFragment extends Fragment implements MatchAdapter.OnMatchI
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         mRVMatches.setLayoutManager(layoutManager);
-
         mAdapter = new MatchAdapter(getActivity(), new ArrayList<Match>(), this);
-        FutMatcherFirebaseDatabase.getInstance().addChildEventListenerToReference(mAdapter);
+
+        FirebaseChildEventListener eventListener = FirebaseChildEventListener.getInstance();
+        eventListener.setMatchAdapter(mAdapter);
+        FutMatcherFirebaseDatabase.getInstance().addChildEventListenerToReference(eventListener);
+
         mRVMatches.setAdapter(mAdapter);
         return view;
     }

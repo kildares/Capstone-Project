@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="@dimen/alert_dialog_width"
+    android:layout_gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFFFF">
+
+    <EditText
+        android:id="@+id/et_add_player_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/alert_hint_player_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/sp_add_player_position"
+        />
+
+    <Spinner
+        android:id="@+id/sp_add_player_position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/player_position"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_add_player_name"
+        />
+
+</android.support.constraint.ConstraintLayout>

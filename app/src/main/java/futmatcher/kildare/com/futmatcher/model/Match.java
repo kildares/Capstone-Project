@@ -60,6 +60,14 @@ public class Match implements Parcelable {
         MaxPlayers = in.readString();
     }
 
+    public void addPlayer(Player player)
+    {
+        if(this.Players == null)
+            this.Players = new ArrayList<>();
+        this.Players.add(player);
+
+    }
+
     public String getTitle() {
         return Title;
     }
@@ -111,6 +119,7 @@ public class Match implements Parcelable {
     public List<Player> getPlayers() {
         return Players;
     }
+
 
     public void setPlayers(List<Player> players) {
         Players = players;

@@ -18,15 +18,13 @@ public class FutMatcherFirebaseDatabase {
     private DatabaseReference mDatabaseReference;
     private static final String ROOT_REFERENCE = "matches";
 
-    private FutMatcherFirebaseDatabase()
-    {
+    private FutMatcherFirebaseDatabase(){
         mDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mDatabase.getReference(ROOT_REFERENCE);
 
     }
 
-    public void addChildEventListenerToReference(ChildEventListener listener)
-    {
+    public void addChildEventListenerToReference(ChildEventListener listener){
         mDatabaseReference.addChildEventListener(listener);
     }
 
@@ -40,9 +38,15 @@ public class FutMatcherFirebaseDatabase {
             return futMatcherFirebaseDatabase;
     }
 
-     public void addMatch(Match match)
-    {
+    public void addMatch(Match match){
+
         mDatabaseReference.child(match.getTitle()).setValue(match);
     }
+
+    public void updateMatch(Match match){
+        mDatabaseReference.child(match.getTitle()).setValue(match);
+    }
+
+
 
 }
