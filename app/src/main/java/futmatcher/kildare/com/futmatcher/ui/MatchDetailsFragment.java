@@ -94,7 +94,7 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
                     Toast.makeText(getActivity(), getActivity().getString(R.string.toast_not_enough_players),Toast.LENGTH_LONG ).show();
                 }
                 else{
-                    mListener.onPickTeamButtonPressed();
+                    mListener.onPickTeamButtonPressed(mMatch);
                 }
             }
         });
@@ -218,7 +218,7 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface MatchDetailsFragmentInteraction{
-        void onPickTeamButtonPressed();
+        void onPickTeamButtonPressed(Match match);
     }
 
     class PlayerAlertDialogListener implements DialogInterface.OnClickListener{

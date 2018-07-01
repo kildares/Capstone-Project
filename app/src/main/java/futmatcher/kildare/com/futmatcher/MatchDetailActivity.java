@@ -27,8 +27,9 @@ public class MatchDetailActivity extends AppCompatActivity implements MatchDetai
 	}
 
 	@Override
-	public void onPickTeamButtonPressed() {
+	public void onPickTeamButtonPressed(Match match) {
 		Intent intent = new Intent(MatchDetailActivity.this, PickTeamActivity.class);
+		intent.putExtra(getString(R.string.bndl_match), match);
 		startActivity(intent);
 	}
 }

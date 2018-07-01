@@ -11,6 +11,8 @@
     <string name="button_pick_team">Pick</string>
     <string name="text_pick_team1">Team 1</string>
     <string name="text_pick_team2">Team 2</string>
+    <string name="text_pick_radio_position">By position</string>
+    <string name="text_pick_radio_random">Randomly</string>
     <string name="text_reserve_team1">Reserves 1</string>
     <string name="hint_title">Match name</string>
     <string name="hint_match_location">Match Location</string>
@@ -38,5 +40,8 @@
 
     <string name="toast_no_players">No players registered</string>
     <string name="toast_not_enough_players">Not enough players registered</string>
+
+    <string name="alert_pick_positive">Pick</string>
+    <string name="alert_pick_negative">Cancel</string>
 
 </resources>
