@@ -36,4 +36,7 @@
     <string name="alert_add_positive">Add</string>
     <string name="alert_add_negative">Cancel</string>
 
+    <string name="toast_no_players">No players registered</string>
+    <string name="toast_not_enough_players">Not enough players registered</string>
+
 </resources>

@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +85,17 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
             @Override
             public void onClick(View view) {
 
+                int numPlayers = mPlayerListAdapter.getCount();
+                int minPlayers = Integer.parseInt(mMatch.getMinPlayers());
+                if(numPlayers == 0){
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.toast_no_players),Toast.LENGTH_LONG ).show();
+                }
+                else if(numPlayers < minPlayers){
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.toast_not_enough_players),Toast.LENGTH_LONG ).show();
+                }
+                else{
+                    mListener.onPickTeamButtonPressed();
+                }
             }
         });
 
@@ -206,6 +218,7 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface MatchDetailsFragmentInteraction{
+        void onPickTeamButtonPressed();
     }
 
     class PlayerAlertDialogListener implements DialogInterface.OnClickListener{

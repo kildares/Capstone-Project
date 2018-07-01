@@ -1,5 +1,6 @@
 package futmatcher.kildare.com.futmatcher;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,4 +26,9 @@ public class MatchDetailActivity extends AppCompatActivity implements MatchDetai
 		mFragment.loadMatchData(match);
 	}
 
+	@Override
+	public void onPickTeamButtonPressed() {
+		Intent intent = new Intent(MatchDetailActivity.this, PickTeamActivity.class);
+		startActivity(intent);
+	}
 }

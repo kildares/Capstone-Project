@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CreateMatchActivity" />
-        <activity android:name=".MatchDetailActivity"></activity>
+        <activity android:name=".MatchDetailActivity" />
+        <activity android:name=".PickTeamActivity"></activity>
     </application>
 
 </manifest>
