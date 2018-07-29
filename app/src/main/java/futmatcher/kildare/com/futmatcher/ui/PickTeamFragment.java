@@ -3,18 +3,27 @@ package futmatcher.kildare.com.futmatcher.ui;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.model.Match;
+import futmatcher.kildare.com.futmatcher.model.Player;
+import futmatcher.kildare.com.futmatcher.model.Team;
 
 
 /**
@@ -25,18 +34,22 @@ import futmatcher.kildare.com.futmatcher.model.Match;
 public class PickTeamFragment extends Fragment {
 
     private PickTeamFragmentInteraction mListener;
-    Match mMatch;
+    private Match mMatch;
 
-    TextView mTextTeam1;
-    TextView mTextTeam2;
-    TextView mTextReserve1;
-    TextView mTextReserve2;
-    ListView mListTeam1;
-    ListView mListTeam2;
-    ListView mListReserve1;
-    ListView mListReserve2;
+    private TextView mTextTeam1;
+    private TextView mTextTeam2;
+    private TextView mTextReserve1;
+    private TextView mTextReserve2;
+    private ListView mListTeam1;
+    private ListView mListTeam2;
+    private ListView mListReserve1;
+    private ListView mListReserve2;
+    private View mPickRadio;
+    private Button mPickButton;
+    private Boolean mTeamPicked;
 
-    Boolean mTeamPicked;
+    private static final int NUM_PLAYERS = 11;
+
 
     public PickTeamFragment() {
         // Required empty public constructor
@@ -76,6 +89,8 @@ public class PickTeamFragment extends Fragment {
         mTextReserve2 = view.findViewById(R.id.tv_reserve2);
         mListReserve1 = view.findViewById(R.id.lv_reserve1);
         mListReserve2 = view.findViewById(R.id.lv_reserve2);
+        mPickButton = view.findViewById(R.id.bt_pick_team);
+        mPickRadio = view.findViewById(R.id.in_pick_team);
 
         return view;
     }
@@ -91,31 +106,26 @@ public class PickTeamFragment extends Fragment {
         mTextReserve2.setVisibility(View.INVISIBLE);
         mListReserve1.setVisibility(View.INVISIBLE);
         mListReserve2.setVisibility(View.INVISIBLE);
+        mPickButton.setVisibility(View.INVISIBLE);
+        mPickRadio.setVisibility(View.INVISIBLE);
 
         FrameLayout frameLayout = new FrameLayout(getActivity());
+
+        PickTeamOnClickListener listener = new PickTeamOnClickListener();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder
             .setTitle(getActivity().getString(R.string.text_pick_team_title))
-            .setPositiveButton(getActivity().getString(R.string.alert_pick_positive), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-
-                }
-            })
-            .setNegativeButton(getActivity().getString(R.string.alert_add_negative), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-
-                }
-            })
+            .setPositiveButton(getActivity().getString(R.string.alert_pick_positive), listener)
+            .setNegativeButton(getActivity().getString(R.string.alert_add_negative), listener)
             .setView(frameLayout)
             .setCancelable(false);
 
         AlertDialog dialog = builder.create();
 
         LayoutInflater inflater = dialog.getLayoutInflater();
-        inflater.inflate(R.layout.pick_team_button, frameLayout);
+        View view = inflater.inflate(R.layout.pick_team_radio, frameLayout);
+        //listener
         dialog.show();
 
     }
@@ -124,6 +134,8 @@ public class PickTeamFragment extends Fragment {
         if (mListener != null) {
         }
     }
+
+
 
     @Override
     public void onAttach(Context context) {
@@ -155,5 +167,43 @@ public class PickTeamFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface PickTeamFragmentInteraction {
+        void onPickTeamCancelled();
+    }
+
+    private class PickTeamOnClickListener implements DialogInterface.OnClickListener{
+
+        private Button mPickTeam;
+        private RadioGroup mRadioGroup;
+
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+
+            switch(i){
+                case DialogInterface.BUTTON_NEGATIVE:{
+                    mListener.onPickTeamCancelled();
+                    break;
+                }
+                case DialogInterface.BUTTON_POSITIVE:{
+
+                    int selectedId = mRadioGroup.getCheckedRadioButtonId();
+                    RadioButton by_position = getActivity().findViewById(R.id.rb_position);
+                    RadioButton random = getActivity().findViewById(R.id.rb_random);
+
+                    if(selectedId == by_position.getId())
+                        mMatch.pickTeamsByPosition();
+                    else
+                        mMatch.pickTeamsRandomly();
+                    break;
+                }
+            }
+        }
+
+        public void setPickTeam(Button pickTeam){
+            mPickTeam = pickTeam;
+        }
+
+        public void setRadioGroup(RadioGroup radioGroup){
+            mRadioGroup = radioGroup;
+        }
     }
 }

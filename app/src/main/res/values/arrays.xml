@@ -10,8 +10,6 @@
         <item>Goal</item>
         <item>Defense</item>
         <item>Midfield</item>
-        <item>Left Side</item>
-        <item>Right Side</item>
         <item>Attack</item>
     </string-array>
 </resources>

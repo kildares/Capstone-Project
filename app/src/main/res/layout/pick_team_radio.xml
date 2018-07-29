@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup
+    android:id="@+id/rg_pick_order"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:checkedButton="@+id/rb_position"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <RadioButton
+            android:id="@+id/rb_position"
+            android:text="@string/text_pick_radio_position"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <RadioButton
+            android:id="@+id/rb_random"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_pick_radio_random" />
+
+    </RadioGroup>

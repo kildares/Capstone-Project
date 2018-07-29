@@ -1,5 +1,6 @@
 package futmatcher.kildare.com.futmatcher;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -24,5 +25,10 @@ public class PickTeamActivity extends AppCompatActivity implements PickTeamFragm
 			mFragment.setMatch(match);
 		}
 		mFragment.emptyData();
+	}
+
+	@Override
+	public void onPickTeamCancelled() {
+		onBackPressed();
 	}
 }

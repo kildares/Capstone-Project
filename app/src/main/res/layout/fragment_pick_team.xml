@@ -111,7 +111,7 @@
 
     <include
         android:id="@+id/in_pick_team"
-        layout="@layout/pick_team_button"
+        layout="@layout/pick_team_radio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintHorizontal_bias="0.0"
@@ -119,6 +119,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lv_reserve2"
         app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Button
+        android:id="@+id/bt_pick_team"
+        android:text="@string/button_pick_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         />
 
 </android.support.constraint.ConstraintLayout>

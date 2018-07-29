@@ -16,6 +16,11 @@ public class Player implements Parcelable{
     private String Name;
     private String Position;
 
+    public static String KEEPER = "Goal";
+    public static String DEFENSE = "Defense";
+    public static String MIDFIELD = "Midfield";
+    public static String ATTACK = "Attack";
+
     public Player()
     {
 
