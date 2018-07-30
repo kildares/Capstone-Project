@@ -3,6 +3,9 @@ package futmatcher.kildare.com.futmatcher.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import paperparcel.PaperParcel;
 
 /**
@@ -63,4 +66,15 @@ public class Player implements Parcelable{
     public void writeToParcel(Parcel parcel, int i) {
         PaperParcelPlayer.writeToParcel(this, parcel, i);
     }
+
+
+    public static List<String> getPlayerNameList(List<Player> players)
+    {
+        List<String> list = new ArrayList<>();
+        for(Player p : players){
+            list.add(p.getName());
+        }
+        return list;
+    }
+
 }

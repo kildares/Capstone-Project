@@ -66,4 +66,5 @@ public class Team implements Parcelable{
 	public void writeToParcel(Parcel parcel, int i) {
 		PaperParcelTeam.writeToParcel(this, parcel, i);
 	}
+
 }

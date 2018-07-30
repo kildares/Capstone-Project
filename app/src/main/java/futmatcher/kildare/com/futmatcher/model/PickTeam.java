@@ -6,6 +6,6 @@ package futmatcher.kildare.com.futmatcher.model;
 
 public interface PickTeam {
 
-	void pickTeamsByPosition();
-	void pickTeamsRandomly();
+	boolean pickTeamsByPosition();
+	boolean pickTeamsRandomly();
 }

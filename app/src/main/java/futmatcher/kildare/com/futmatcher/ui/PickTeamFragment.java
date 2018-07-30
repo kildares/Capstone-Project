@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import futmatcher.kildare.com.futmatcher.FirebaseChildEventListener;
 import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.model.Match;
 import futmatcher.kildare.com.futmatcher.model.Player;
@@ -47,8 +49,6 @@ public class PickTeamFragment extends Fragment {
     private View mPickRadio;
     private Button mPickButton;
     private Boolean mTeamPicked;
-
-    private static final int NUM_PLAYERS = 11;
 
 
     public PickTeamFragment() {
@@ -126,8 +126,23 @@ public class PickTeamFragment extends Fragment {
         LayoutInflater inflater = dialog.getLayoutInflater();
         View view = inflater.inflate(R.layout.pick_team_radio, frameLayout);
         //listener
+        listener.setView(view);
         dialog.show();
 
+    }
+
+    public void showData(){
+        mTeamPicked = false;
+        mTextTeam1.setVisibility(View.VISIBLE);
+        mTextTeam2.setVisibility(View.VISIBLE);
+        mListTeam1.setVisibility(View.VISIBLE);
+        mListTeam2.setVisibility(View.VISIBLE);
+        mTextReserve1.setVisibility(View.VISIBLE);
+        mTextReserve2.setVisibility(View.VISIBLE);
+        mListReserve1.setVisibility(View.VISIBLE);
+        mListReserve2.setVisibility(View.VISIBLE);
+        mPickButton.setVisibility(View.VISIBLE);
+        mPickRadio.setVisibility(View.VISIBLE);
     }
 
     public void onButtonPressed() {
@@ -135,7 +150,35 @@ public class PickTeamFragment extends Fragment {
         }
     }
 
+    public void updateTeamViews()
+    {
+        ArrayAdapter<String> arrayTeam1 = loadListViewPlayers(mMatch.getTeam1().getTeamPlayers());
+        mListTeam1.setAdapter(arrayTeam1);
+        arrayTeam1.notifyDataSetChanged();
 
+        ArrayAdapter<String> arrayTeam2 = loadListViewPlayers(mMatch.getTeam2().getTeamPlayers());
+        mListTeam2.setAdapter(arrayTeam2);
+        arrayTeam2.notifyDataSetChanged();
+
+        ArrayAdapter<String> arrayRes1 = loadListViewPlayers(mMatch.getTeam1().getTeamSubstitutes());
+        mListReserve1.setAdapter(arrayRes1);
+        arrayRes1.notifyDataSetChanged();
+
+        ArrayAdapter<String> arrayRes2 = loadListViewPlayers(mMatch.getTeam2().getTeamSubstitutes());
+        mListReserve1.setAdapter(arrayRes2);
+        arrayRes2.notifyDataSetChanged();
+
+        showData();
+    }
+
+    public ArrayAdapter<String> loadListViewPlayers(List<Player> players)
+    {
+        if(players != null){
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, Player.getPlayerNameList(players));
+            return adapter;
+        }
+        return new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, new ArrayList<String>());
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -174,9 +217,14 @@ public class PickTeamFragment extends Fragment {
 
         private Button mPickTeam;
         private RadioGroup mRadioGroup;
+        private View mView;
+        PickTeamOnClickListener(){
+        }
 
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
+
+            mRadioGroup = mView.findViewById(R.id.rg_pick_order);
 
             switch(i){
                 case DialogInterface.BUTTON_NEGATIVE:{
@@ -193,9 +241,15 @@ public class PickTeamFragment extends Fragment {
                         mMatch.pickTeamsByPosition();
                     else
                         mMatch.pickTeamsRandomly();
+
+                    updateTeamViews();
                     break;
                 }
             }
+        }
+
+        public void setView(View view){
+            this.mView = view;
         }
 
         public void setPickTeam(Button pickTeam){

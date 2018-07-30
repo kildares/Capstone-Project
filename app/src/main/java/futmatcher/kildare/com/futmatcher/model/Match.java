@@ -154,7 +154,7 @@ public class Match implements Parcelable, PickTeam {
     }
 
     @Override
-    public void pickTeamsRandomly(){
+    public boolean pickTeamsRandomly(){
 
         boolean[] posPlayer = new boolean[Players.size()];
         for(int i = 0 ; i < posPlayer.length ; i++)
@@ -163,6 +163,8 @@ public class Match implements Parcelable, PickTeam {
         posPlayer = getTeamRandom(posPlayer, true);
         posPlayer = getTeamRandom(posPlayer, false);
         posPlayer = getTeamReserves(posPlayer);
+
+        return true;
     }
 
     public boolean[] getTeamRandom(boolean[] players, boolean isFirstTeam){
@@ -210,7 +212,7 @@ public class Match implements Parcelable, PickTeam {
     }
 
     @Override
-    public void pickTeamsByPosition()
+    public boolean pickTeamsByPosition()
     {
 
         Team1 = new Team(new ArrayList<Player>());
@@ -225,6 +227,8 @@ public class Match implements Parcelable, PickTeam {
 		addPlayersToTeamsByPosition(defense,4);
 		addPlayersToTeamsByPosition(midfield,4);
 		addPlayersToTeamsByPosition(attack,2);
+
+		return true;
     }
 
     public List<Player> sortPlayersByPosition(String position){
@@ -271,4 +275,5 @@ public class Match implements Parcelable, PickTeam {
 		}
 		return true;
     }
+
 }
