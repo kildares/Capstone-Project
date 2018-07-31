@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         style="@style/ToolbarFutTheme"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/tv_team1"
         >
 
         <TextView
@@ -34,18 +33,18 @@
         android:text="@string/text_pick_team1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_pick_title"
-        app:layout_constraintBottom_toTopOf="@+id/rv_team1"
         app:layout_constraintRight_toLeftOf="@id/tv_team2"
         />
 
     <ListView
         android:id="@+id/lv_team1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_team1"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="175dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         app:layout_constraintRight_toLeftOf="@+id/lv_team2"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_team1" />
 
 
     <TextView
@@ -61,12 +60,13 @@
 
     <ListView
         android:id="@+id/lv_team2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_team2"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="175dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/lv_team1"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tv_team2" />
 
     <TextView
         android:id="@+id/tv_reserve1"
@@ -81,8 +81,10 @@
 
     <ListView
         android:id="@+id/lv_reserve1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         app:layout_constraintTop_toBottomOf="@+id/tv_reserve1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/lv_reserve2"
@@ -101,22 +103,22 @@
 
     <ListView
         android:id="@+id/lv_reserve2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         app:layout_constraintTop_toBottomOf="@+id/tv_reserve2"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/lv_reserve1"
-        app:layout_constraintBottom_toTopOf="@+id/in_pick_team"
         />
 
     <include
         android:id="@+id/in_pick_team"
         layout="@layout/pick_team_radio"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/bt_pick_team"
         app:layout_constraintTop_toBottomOf="@+id/lv_reserve2"
         app:layout_constraintBottom_toBottomOf="parent"
         />
@@ -127,6 +129,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/lv_reserve2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/in_pick_team"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 
 </android.support.constraint.ConstraintLayout>

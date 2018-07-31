@@ -83,8 +83,8 @@ public class PickTeamFragment extends Fragment {
 
         mTextTeam1 = view.findViewById(R.id.tv_team1);
         mTextTeam2 = view.findViewById(R.id.tv_team2);
-        mListTeam1 = view.findViewById(R.id.lv_reserve1);
-        mListTeam2 = view.findViewById(R.id.lv_reserve2);
+        mListTeam1 = view.findViewById(R.id.lv_team1);
+        mListTeam2 = view.findViewById(R.id.lv_team2);
         mTextReserve1 = view.findViewById(R.id.tv_reserve1);
         mTextReserve2 = view.findViewById(R.id.tv_reserve2);
         mListReserve1 = view.findViewById(R.id.lv_reserve1);
@@ -174,7 +174,7 @@ public class PickTeamFragment extends Fragment {
     public ArrayAdapter<String> loadListViewPlayers(List<Player> players)
     {
         if(players != null){
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, Player.getPlayerNameList(players));
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.pick_team_item, Player.getPlayerNameList(players));
             return adapter;
         }
         return new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, new ArrayList<String>());
@@ -235,7 +235,6 @@ public class PickTeamFragment extends Fragment {
 
                     int selectedId = mRadioGroup.getCheckedRadioButtonId();
                     RadioButton by_position = getActivity().findViewById(R.id.rb_position);
-                    RadioButton random = getActivity().findViewById(R.id.rb_random);
 
                     if(selectedId == by_position.getId())
                         mMatch.pickTeamsByPosition();

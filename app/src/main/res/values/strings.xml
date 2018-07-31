@@ -14,6 +14,7 @@
     <string name="text_pick_radio_position">By position</string>
     <string name="text_pick_radio_random">Randomly</string>
     <string name="text_reserve_team1">Reserves 1</string>
+    <string name="text_reserve_team2">Reserves 2</string>
     <string name="hint_title">Match name</string>
     <string name="hint_match_location">Match Location</string>
 
