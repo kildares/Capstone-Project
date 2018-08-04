@@ -2,6 +2,7 @@ package futmatcher.kildare.com.futmatcher.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -223,6 +224,12 @@ public class Match implements Parcelable, PickTeam {
         List<Player> midfield = sortPlayersByPosition(Player.MIDFIELD);
         List<Player> attack = sortPlayersByPosition(Player.ATTACK);
 
+        if(keepers.size() < 2 || defense.size() < 8 || midfield.size() < 8){
+			Log.i("PICK","Not enough players");
+			throw new RuntimeException();
+		}
+
+
 		addPlayersToTeamsByPosition(keepers, 1);
 		addPlayersToTeamsByPosition(defense,4);
 		addPlayersToTeamsByPosition(midfield,4);
@@ -234,7 +241,7 @@ public class Match implements Parcelable, PickTeam {
     public List<Player> sortPlayersByPosition(String position){
         List<Player> player = new ArrayList<>();
         for(Player p : Players)
-            if(position == p.getPosition())
+            if(position.equals(p.getPosition()))
                 player.add(p);
         return player;
     }

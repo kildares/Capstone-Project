@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -236,12 +237,15 @@ public class PickTeamFragment extends Fragment {
                     int selectedId = mRadioGroup.getCheckedRadioButtonId();
                     RadioButton by_position = getActivity().findViewById(R.id.rb_position);
 
-                    if(selectedId == by_position.getId())
-                        mMatch.pickTeamsByPosition();
-                    else
-                        mMatch.pickTeamsRandomly();
-
-                    updateTeamViews();
+                    try{
+                        if(selectedId == by_position.getId())
+                            mMatch.pickTeamsByPosition();
+                        else
+                            mMatch.pickTeamsRandomly();
+                        updateTeamViews();
+                    }catch(RuntimeException e){
+                        mListener.onPickTeamCancelled();
+                    }
                     break;
                 }
             }
