@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +19,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import futmatcher.kildare.com.futmatcher.FirebaseChildEventListener;
 import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.model.Match;
 import futmatcher.kildare.com.futmatcher.model.Player;
-import futmatcher.kildare.com.futmatcher.model.Team;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,10 +42,11 @@ public class PickTeamFragment extends Fragment {
     private ListView mListTeam2;
     private ListView mListReserve1;
     private ListView mListReserve2;
-    private View mPickRadio;
     private Button mPickButton;
     private Boolean mTeamPicked;
 
+    private Button mPickTeam;
+    private RadioGroup mRadioGroup;
 
     public PickTeamFragment() {
         // Required empty public constructor
@@ -91,10 +87,37 @@ public class PickTeamFragment extends Fragment {
         mListReserve1 = view.findViewById(R.id.lv_reserve1);
         mListReserve2 = view.findViewById(R.id.lv_reserve2);
         mPickButton = view.findViewById(R.id.bt_pick_team);
-        mPickRadio = view.findViewById(R.id.in_pick_team);
+        mRadioGroup = view.findViewById(R.id.in_pick_team);
+
+        mPickButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pickTeam();
+            }
+        });
 
         return view;
     }
+
+    public void pickTeam() {
+
+        int selectedId = mRadioGroup.getCheckedRadioButtonId();
+        RadioButton by_position = getActivity().findViewById(R.id.rb_position);
+        try{
+            if(selectedId == by_position.getId())
+                mMatch.pickTeamsByPosition();
+            else
+                mMatch.pickTeamsRandomly();
+            updateTeamViews();
+            mTeamPicked=true;
+        }catch(RuntimeException e){
+            if(!mTeamPicked)
+                mListener.onPickTeamCancelled();
+            else
+                Toast.makeText(getActivity(), getActivity().getString(R.string.toast_not_enough_players), Toast.LENGTH_LONG).show();
+        }
+    }
+
 
     public void emptyData()
     {
@@ -108,10 +131,9 @@ public class PickTeamFragment extends Fragment {
         mListReserve1.setVisibility(View.INVISIBLE);
         mListReserve2.setVisibility(View.INVISIBLE);
         mPickButton.setVisibility(View.INVISIBLE);
-        mPickRadio.setVisibility(View.INVISIBLE);
+        mRadioGroup.setVisibility(View.INVISIBLE);
 
         FrameLayout frameLayout = new FrameLayout(getActivity());
-
         PickTeamOnClickListener listener = new PickTeamOnClickListener();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -143,7 +165,9 @@ public class PickTeamFragment extends Fragment {
         mListReserve1.setVisibility(View.VISIBLE);
         mListReserve2.setVisibility(View.VISIBLE);
         mPickButton.setVisibility(View.VISIBLE);
-        mPickRadio.setVisibility(View.VISIBLE);
+
+        mRadioGroup = getActivity().findViewById(R.id.in_pick_team);
+        mRadioGroup.setVisibility(View.VISIBLE);
     }
 
     public void onButtonPressed() {
@@ -216,36 +240,20 @@ public class PickTeamFragment extends Fragment {
 
     private class PickTeamOnClickListener implements DialogInterface.OnClickListener{
 
-        private Button mPickTeam;
-        private RadioGroup mRadioGroup;
         private View mView;
         PickTeamOnClickListener(){
         }
 
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
-
             mRadioGroup = mView.findViewById(R.id.rg_pick_order);
-
             switch(i){
                 case DialogInterface.BUTTON_NEGATIVE:{
                     mListener.onPickTeamCancelled();
                     break;
                 }
                 case DialogInterface.BUTTON_POSITIVE:{
-
-                    int selectedId = mRadioGroup.getCheckedRadioButtonId();
-                    RadioButton by_position = getActivity().findViewById(R.id.rb_position);
-
-                    try{
-                        if(selectedId == by_position.getId())
-                            mMatch.pickTeamsByPosition();
-                        else
-                            mMatch.pickTeamsRandomly();
-                        updateTeamViews();
-                    }catch(RuntimeException e){
-                        mListener.onPickTeamCancelled();
-                    }
+                    pickTeam();
                     break;
                 }
             }
@@ -253,10 +261,6 @@ public class PickTeamFragment extends Fragment {
 
         public void setView(View view){
             this.mView = view;
-        }
-
-        public void setPickTeam(Button pickTeam){
-            mPickTeam = pickTeam;
         }
 
         public void setRadioGroup(RadioGroup radioGroup){

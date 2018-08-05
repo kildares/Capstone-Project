@@ -67,8 +67,6 @@ public class MatchListFragment extends Fragment implements MatchAdapter.OnMatchI
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getActivity(),Integer.toString(mRVMatches.getAdapter().getItemCount()),Toast.LENGTH_SHORT).show();
-
                 if(mListener != null)
                     mListener.onCreateMatchButtonPressed();
             }
