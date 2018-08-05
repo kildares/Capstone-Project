@@ -23,7 +23,7 @@ public class MatchDetailActivity extends AppCompatActivity implements MatchDetai
 
 		mFragment = (MatchDetailsFragment) getSupportFragmentManager().findFragmentById(R.id.fr_match_detail);
 
-		mFragment.loadMatchData(match);
+		mFragment.reloadMatchData(match);
 	}
 
 	@Override

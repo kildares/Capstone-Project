@@ -140,6 +140,9 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
         PlayersListTitle = view.findViewById(R.id.tv_detail_players);
         PlayersList = view.findViewById(R.id.lv_players);
 
+        if(mMatch != null)
+            reloadMatchData(mMatch);
+
         loadPlayersList();
 
         return view;
@@ -162,7 +165,7 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
         mListener = null;
     }
 
-    public void loadMatchData(Match match)
+    public void reloadMatchData(Match match)
     {
         mMatch = match;
 
@@ -174,6 +177,14 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
         if(!(mMatch.getPlayers() == null || mMatch.getPlayers().size() == 0)){
             loadPlayersList();
         }
+    }
+
+    public Match getMatch() {
+        return mMatch;
+    }
+
+    public void setMatch(Match mMatch) {
+        this.mMatch = mMatch;
     }
 
     public void loadPlayersList()
@@ -246,7 +257,8 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
     @Override
     public void removePlayer(Player player) {
         mMatch.removePlayerFromMatch(player);
-        FutMatcherFirebaseDatabase.getInstance().updateMatch(mMatch);
+        FutMatcherFirebaseDatabase
+                .getInstance().updateMatch(mMatch);
     }
 
 

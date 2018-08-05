@@ -79,8 +79,6 @@ public class Match implements Parcelable, PickTeam {
     }
 
 
-
-
     public String getTitle() {
         return Title;
     }
