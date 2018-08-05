@@ -145,7 +145,6 @@ public class PickTeamFragment extends Fragment {
             .setCancelable(false);
 
         AlertDialog dialog = builder.create();
-
         LayoutInflater inflater = dialog.getLayoutInflater();
         View view = inflater.inflate(R.layout.pick_team_radio, frameLayout);
         //listener

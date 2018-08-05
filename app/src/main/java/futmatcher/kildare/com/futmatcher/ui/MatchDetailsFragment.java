@@ -5,9 +5,11 @@ import android.support.v7.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +22,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import futmatcher.kildare.com.futmatcher.dialoginterface.EditPlayerInterface;
+import futmatcher.kildare.com.futmatcher.dialoginterface.EditPlayerOnClickListener;
 import futmatcher.kildare.com.futmatcher.FirebaseChildEventListener;
 import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.model.Match;
@@ -35,7 +39,7 @@ import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
  * Use the {@link MatchDetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MatchDetailsFragment extends Fragment implements View.OnClickListener{
+public class MatchDetailsFragment extends Fragment implements View.OnClickListener, EditPlayerInterface{
 
     private MatchDetailsFragmentInteraction mListener;
     private Match mMatch;
@@ -47,6 +51,8 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
     private Button mAddPlayer;
     private Button mPickTeam;
     private ArrayAdapter<String> mPlayerListAdapter;
+
+    private static final String LOG_TAG = "MatchDetailsFragment";
 
     public MatchDetailsFragment() {
         // Required empty public constructor
@@ -81,6 +87,36 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
         PlayersList = view.findViewById(R.id.lv_players);
         mPickTeam = view.findViewById(R.id.bt_pick);
 
+        PlayersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                Player player = mMatch.getPlayers().get(position);
+
+                if(player == null)
+                    throw new RuntimeException();
+
+                Log.i(LOG_TAG,"Player selected: " + mMatch.getPlayers().get(position).getName());
+
+                FrameLayout frameLayout = new FrameLayout(getActivity());
+                EditPlayerOnClickListener listener = new EditPlayerOnClickListener(MatchDetailsFragment.this, player);
+
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity());
+                builder
+                        .setTitle(getActivity().getString(R.string.alert_edit_player))
+                        .setPositiveButton(getActivity().getString(R.string.alert_positive_button), listener)
+                        .setNegativeButton(getActivity().getString(R.string.alert_negative_button), listener)
+                        .setView(frameLayout)
+                        .setCancelable(true);
+
+                android.app.AlertDialog dialog = builder.create();
+                LayoutInflater inflater = dialog.getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.add_player_alert_dialog, frameLayout);
+                dialog.show();
+
+            }
+        });
+
         mPickTeam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,11 +136,8 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
         });
 
         mAddPlayer = view.findViewById(R.id.bt_add_player);
-
         mAddPlayer.setOnClickListener(this);
-
         PlayersListTitle = view.findViewById(R.id.tv_detail_players);
-
         PlayersList = view.findViewById(R.id.lv_players);
 
         loadPlayersList();
@@ -197,17 +230,27 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
         return new ArrayList<>();
     }
 
-
-    public void addPlayerToMatch(String Name, String Position)
+    @Override
+    public void addPlayer(String Name, String Position)
     {
         Player player = new Player(Name, Position);
-        mMatch.addPlayer(player);
+        mMatch.addPlayerToMatch(player);
         FutMatcherFirebaseDatabase.getInstance().updateMatch(mMatch);
+    }
 
+    @Override
+    public void editPlayer(Player player) {
+        FutMatcherFirebaseDatabase.getInstance().updateMatch(mMatch);
+    }
+
+    @Override
+    public void removePlayer(Player player) {
+        mMatch.removePlayerFromMatch(player);
+        FutMatcherFirebaseDatabase.getInstance().updateMatch(mMatch);
     }
 
 
-/**
+    /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
@@ -219,6 +262,7 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
      */
     public interface MatchDetailsFragmentInteraction{
         void onPickTeamButtonPressed(Match match);
+
     }
 
     class PlayerAlertDialogListener implements DialogInterface.OnClickListener{
@@ -234,7 +278,7 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
                     if (mAddPlayerName != null && mPlayerPosition != null && !mAddPlayerName.getText().toString().isEmpty()) {
                         String name = mAddPlayerName.getText().toString();
                         String position = mPlayerPosition.getSelectedItem().toString();
-                        addPlayerToMatch(name, position);
+                        addPlayer(name, position);
                     }
                     break;
                 }

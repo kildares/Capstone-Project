@@ -64,13 +64,22 @@ public class Match implements Parcelable, PickTeam {
         MaxPlayers = in.readString();
     }
 
-    public void addPlayer(Player player)
+    public void addPlayerToMatch(Player player)
     {
         if(this.Players == null)
             this.Players = new ArrayList<>();
         this.Players.add(player);
-
     }
+
+    public boolean removePlayerFromMatch(Player player)
+    {
+        if(this.Players == null)
+            this.Players = new ArrayList<>();
+        return this.Players.remove(player);
+    }
+
+
+
 
     public String getTitle() {
         return Title;

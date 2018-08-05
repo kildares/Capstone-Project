@@ -5,6 +5,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import futmatcher.kildare.com.futmatcher.model.Match;
+import futmatcher.kildare.com.futmatcher.model.Player;
 
 /**
  * Created by kilda on 6/9/2018.
@@ -39,7 +40,6 @@ public class FutMatcherFirebaseDatabase {
     }
 
     public void addMatch(Match match){
-
         mDatabaseReference.child(match.getTitle()).setValue(match);
     }
 
@@ -47,6 +47,8 @@ public class FutMatcherFirebaseDatabase {
         mDatabaseReference.child(match.getTitle()).setValue(match);
     }
 
-
+    public void removeMatch(Match match){
+        mDatabaseReference.child(match.getTitle()).removeValue();
+    }
 
 }
