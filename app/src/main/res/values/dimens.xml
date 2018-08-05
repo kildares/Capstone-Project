@@ -14,5 +14,9 @@
 
     <dimen name="button_border">2dp</dimen>
     <dimen name="button_elevation">4dp</dimen>
+    <dimen name="button_padding">8dp</dimen>
+    <dimen name="button_text_size">18dp</dimen>
+
+    <dimen name="detail_list_view_height">350dp</dimen>
 
 </resources>
