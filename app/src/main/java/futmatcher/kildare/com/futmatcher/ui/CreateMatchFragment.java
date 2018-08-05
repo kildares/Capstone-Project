@@ -4,12 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.model.Match;
@@ -30,6 +32,8 @@ public class CreateMatchFragment extends Fragment {
     EditText mMinPlayers;
     EditText mMaxPlayers;
     Spinner mNumPlayers;
+
+    public static final String LOG_TAG = "CreateMatchFragment";
 
     public CreateMatchFragment() {
         // Required empty public constructor
@@ -59,7 +63,6 @@ public class CreateMatchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View view = inflater.inflate(R.layout.fragment_create_match, container, false);
 
         mCreateButton =  view.findViewById(R.id.bt_create_match);
@@ -78,8 +81,13 @@ public class CreateMatchFragment extends Fragment {
                 String title = mMatchTitle.getText().toString();
                 String location = mMatchLocation.getText().toString();
                 String date = mMatchDate.getText().toString();
-                if(!title.isEmpty() && !location.isEmpty() && !date.isEmpty() && isValidMinPlayers() && isValidMaxPlayers())
+                if(!title.isEmpty() && !location.isEmpty() && !date.isEmpty() && isValidMinPlayers() && isValidMaxPlayers()){
                     createMatch();
+                }
+                else{
+                    Log.i(LOG_TAG ,"Unable to create match");
+                    Toast.makeText(getActivity(),getActivity().getString(R.string.toast_missing_field),Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -113,7 +121,7 @@ public class CreateMatchFragment extends Fragment {
 
         FutMatcherFirebaseDatabase firebaseDatabase = FutMatcherFirebaseDatabase.getInstance();
         firebaseDatabase.addMatch(match);
-
+        Log.i(LOG_TAG,"Creating Match");
     }
 
 

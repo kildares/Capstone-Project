@@ -8,6 +8,7 @@
         <item name="android:textSize">@dimen/textSize</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:buttonStyle">@style/FutButtonStyle</item>
     </style>
 
 
@@ -27,6 +28,15 @@
         <item name="android:textSize">@dimen/titleTextSize</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
 
+    </style>
+
+    <style name="FutButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/button_border</item>
+        <item name="android:elevation">@dimen/button_elevation</item>
+        <item name="android:layout_marginStart">@dimen/marginSize</item>
+        <item name="android:layout_marginEnd">@dimen/marginSize</item>
+        <item name="android:layout_marginTop">@dimen/marginSize</item>
+        <item name="android:layout_marginBottom">@dimen/marginSize</item>
     </style>
 
 </resources>

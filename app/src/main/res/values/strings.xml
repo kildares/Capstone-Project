@@ -45,4 +45,6 @@
     <string name="alert_pick_positive">Pick</string>
     <string name="alert_pick_negative">Cancel</string>
 
+    <string name="toast_missing_field">Please input all fields</string>
+
 </resources>

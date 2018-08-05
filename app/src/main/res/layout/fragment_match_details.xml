@@ -56,9 +56,10 @@
         <Button
             android:id="@+id/bt_add_player"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="@string/button_add_player"
+            style="@style/FutButtonStyle"
             />
 
         <Button
@@ -66,6 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            style="@style/FutButtonStyle"
             android:text="@string/button_pick_team"
             />
 

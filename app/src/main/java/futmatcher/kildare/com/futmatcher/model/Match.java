@@ -282,5 +282,4 @@ public class Match implements Parcelable, PickTeam {
 		}
 		return true;
     }
-
 }

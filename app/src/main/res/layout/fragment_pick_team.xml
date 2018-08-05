@@ -1,28 +1,26 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="futmatcher.kildare.com.futmatcher.ui.PickTeamFragment">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_pick_title"
+        style="@style/ToolbarFutTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/ToolbarFutTheme"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tv_pick_title"
+            style="@style/TitleFutTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/text_pick_team_title"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            style="@style/TitleFutTheme"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -33,45 +31,41 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_team1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/bt_pick_team"
-        app:layout_constraintTop_toBottomOf="@+id/tb_pick_title"
-        app:layout_constraintBottom_toTopOf="@+id/tv_team1"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tb_pick_title" />
 
     <Button
         android:id="@+id/bt_pick_team"
-        android:text="@string/button_pick_team"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/in_pick_team"
-        app:layout_constraintTop_toBottomOf="@+id/tb_pick_title"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:text="@string/button_pick_team"
         app:layout_constraintBottom_toTopOf="@+id/tv_team1"
-        />
-
+        app:layout_constraintLeft_toRightOf="@+id/in_pick_team"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_pick_title" />
 
     <TextView
         android:id="@+id/tv_team1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_pick_team1"
+        app:layout_constraintBottom_toTopOf="@id/lv_team1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/in_pick_team"
         app:layout_constraintRight_toLeftOf="@id/tv_team2"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/in_pick_team" />
 
     <ListView
         android:id="@+id/lv_team1"
         android:layout_width="175dp"
         android:layout_height="200dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_reserve1"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/lv_team2"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_team1" />
 
 
@@ -80,64 +74,55 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_pick_team2"
-        app:layout_constraintLeft_toRightOf="@+id/tv_team1"
-        app:layout_constraintTop_toBottomOf="@+id/in_pick_team"
         app:layout_constraintBottom_toTopOf="@+id/lv_team1"
+        app:layout_constraintLeft_toRightOf="@+id/tv_team1"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="@+id/tv_team1" />
 
     <ListView
         android:id="@+id/lv_team2"
         android:layout_width="175dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lv_team1"
         app:layout_constraintLeft_toRightOf="@+id/lv_team1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_team2" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/lv_team1" />
 
     <TextView
         android:id="@+id/tv_reserve1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_reserve_team1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lv_team1"
         app:layout_constraintBottom_toTopOf="@+id/lv_reserve1"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tv_reserve2"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/lv_team1" />
 
     <ListView
         android:id="@+id/lv_reserve1"
         android:layout_width="175dp"
         android:layout_height="200dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_reserve1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/lv_reserve2"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tv_reserve1" />
 
     <TextView
         android:id="@+id/tv_reserve2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_reserve_team2"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_reserve1"
         app:layout_constraintLeft_toRightOf="@+id/tv_reserve1"
-        app:layout_constraintTop_toBottomOf="@+id/lv_team2"
-        app:layout_constraintBottom_toTopOf="@+id/lv_reserve2"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="@+id/tv_reserve1" />
 
     <ListView
         android:id="@+id/lv_reserve2"
         android:layout_width="175dp"
         android:layout_height="200dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_reserve2"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/lv_reserve1"
         app:layout_constraintLeft_toRightOf="@+id/lv_reserve1"
-        />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/lv_reserve1" />
 
 </android.support.constraint.ConstraintLayout>
