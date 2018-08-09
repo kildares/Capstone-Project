@@ -1,6 +1,7 @@
 package futmatcher.kildare.com.futmatcher;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ public class PickTeamActivity extends AppCompatActivity implements PickTeamFragm
 			Match match = bundle.getParcelable(getString(R.string.bndl_match));
 			mFragment.setMatch(match);
 		}
-		mFragment.emptyData();
+
 	}
 
 	@Override
@@ -33,4 +34,11 @@ public class PickTeamActivity extends AppCompatActivity implements PickTeamFragm
 		Toast.makeText(this,"Could not pick teams",Toast.LENGTH_LONG).show();
 		onBackPressed();
 	}
+
+	@Override
+	public void onPickTeamFragmentStateChanged(Fragment fragment) {
+
+	}
+
+
 }

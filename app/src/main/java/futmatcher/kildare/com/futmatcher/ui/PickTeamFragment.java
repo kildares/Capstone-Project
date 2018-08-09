@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,10 +44,17 @@ public class PickTeamFragment extends Fragment {
     private ListView mListReserve1;
     private ListView mListReserve2;
     private Button mPickButton;
-    private Boolean mTeamPicked;
+    private int mTeamPicked;
 
     private Button mPickTeam;
     private RadioGroup mRadioGroup;
+
+    private static final int TEAM_NOT_PICKED_CODE = 0;
+    private static final int TEAM_PICKED_RANDOM = 1;
+    private static final int TEAM_PICKED_POSITION = 2;
+
+    private static final String ID_TEAM_PICKED = "id_team_picked";
+    private static final String ID_MATCH = "id_match";
 
     public PickTeamFragment() {
         // Required empty public constructor
@@ -76,6 +84,12 @@ public class PickTeamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        if(savedInstanceState != null){
+            mTeamPicked = savedInstanceState.getInt(ID_TEAM_PICKED);
+            mMatch = savedInstanceState.getParcelable(ID_MATCH);
+            mListener.onPickTeamFragmentStateChanged(this);
+        }
+
         View view = inflater.inflate(R.layout.fragment_pick_team, container, false);
 
         mTextTeam1 = view.findViewById(R.id.tv_team1);
@@ -96,6 +110,11 @@ public class PickTeamFragment extends Fragment {
             }
         });
 
+        if(mTeamPicked == TEAM_NOT_PICKED_CODE)
+            emptyData();
+        else
+            updateTeamViews();
+
         return view;
     }
 
@@ -104,14 +123,18 @@ public class PickTeamFragment extends Fragment {
         int selectedId = mRadioGroup.getCheckedRadioButtonId();
         RadioButton by_position = getActivity().findViewById(R.id.rb_position);
         try{
-            if(selectedId == by_position.getId())
+            if(selectedId == by_position.getId()){
                 mMatch.pickTeamsByPosition();
-            else
+                mTeamPicked = TEAM_PICKED_POSITION;
+            }
+            else{
                 mMatch.pickTeamsRandomly();
+                mTeamPicked = TEAM_PICKED_RANDOM;
+            }
             updateTeamViews();
-            mTeamPicked=true;
         }catch(RuntimeException e){
-            if(!mTeamPicked)
+            e.printStackTrace();
+            if(mTeamPicked == TEAM_NOT_PICKED_CODE)
                 mListener.onPickTeamCancelled();
             else
                 Toast.makeText(getActivity(), getActivity().getString(R.string.toast_not_enough_players), Toast.LENGTH_LONG).show();
@@ -121,7 +144,7 @@ public class PickTeamFragment extends Fragment {
 
     public void emptyData()
     {
-        mTeamPicked = false;
+        mTeamPicked = TEAM_NOT_PICKED_CODE;
         mTextTeam1.setVisibility(View.INVISIBLE);
         mTextTeam2.setVisibility(View.INVISIBLE);
         mListTeam1.setVisibility(View.INVISIBLE);
@@ -154,7 +177,6 @@ public class PickTeamFragment extends Fragment {
     }
 
     public void showData(){
-        mTeamPicked = false;
         mTextTeam1.setVisibility(View.VISIBLE);
         mTextTeam2.setVisibility(View.VISIBLE);
         mListTeam1.setVisibility(View.VISIBLE);
@@ -165,8 +187,8 @@ public class PickTeamFragment extends Fragment {
         mListReserve2.setVisibility(View.VISIBLE);
         mPickButton.setVisibility(View.VISIBLE);
 
-        mRadioGroup = getActivity().findViewById(R.id.in_pick_team);
-        mRadioGroup.setVisibility(View.VISIBLE);
+        //mRadioGroup = getActivity().findViewById(R.id.in_pick_team);
+        //mRadioGroup.setVisibility(View.VISIBLE);
     }
 
     public void onButtonPressed() {
@@ -176,6 +198,7 @@ public class PickTeamFragment extends Fragment {
 
     public void updateTeamViews()
     {
+
         ArrayAdapter<String> arrayTeam1 = loadListViewPlayers(mMatch.getTeam1().getTeamPlayers());
         mListTeam1.setAdapter(arrayTeam1);
         arrayTeam1.notifyDataSetChanged();
@@ -209,8 +232,7 @@ public class PickTeamFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof PickTeamFragmentInteraction) {
             mListener = (PickTeamFragmentInteraction) context;
-            if(mMatch == null)
-                mTeamPicked = false;
+            mTeamPicked = TEAM_NOT_PICKED_CODE;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -221,6 +243,12 @@ public class PickTeamFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt(ID_TEAM_PICKED, mTeamPicked);
+        outState.putParcelable(ID_MATCH, mMatch);
     }
 
     /**
@@ -235,6 +263,7 @@ public class PickTeamFragment extends Fragment {
      */
     public interface PickTeamFragmentInteraction {
         void onPickTeamCancelled();
+        void onPickTeamFragmentStateChanged(Fragment fragment);
     }
 
     private class PickTeamOnClickListener implements DialogInterface.OnClickListener{
@@ -245,6 +274,7 @@ public class PickTeamFragment extends Fragment {
 
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
+            mRadioGroup.setVisibility(View.VISIBLE); //TODO acertar isso depois
             mRadioGroup = mView.findViewById(R.id.rg_pick_order);
             switch(i){
                 case DialogInterface.BUTTON_NEGATIVE:{

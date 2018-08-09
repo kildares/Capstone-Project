@@ -32,4 +32,9 @@ public class MatchDetailActivity extends AppCompatActivity implements MatchDetai
 		intent.putExtra(getString(R.string.bndl_match), match);
 		startActivity(intent);
 	}
+
+	@Override
+	public void onMatchDetailsFragmentStateChanged(Fragment fragment) {
+
+	}
 }

@@ -1,6 +1,7 @@
 package futmatcher.kildare.com.futmatcher.ui;
 
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -24,8 +25,10 @@ import java.util.List;
 
 import futmatcher.kildare.com.futmatcher.dialoginterface.EditPlayerInterface;
 import futmatcher.kildare.com.futmatcher.dialoginterface.EditPlayerOnClickListener;
-import futmatcher.kildare.com.futmatcher.FirebaseChildEventListener;
+import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseChildEventFactory;
 import futmatcher.kildare.com.futmatcher.R;
+import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseEventListener;
+import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebasePlayerEventListener;
 import futmatcher.kildare.com.futmatcher.model.Match;
 import futmatcher.kildare.com.futmatcher.model.Player;
 import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
@@ -54,6 +57,8 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
 
     private static final String LOG_TAG = "MatchDetailsFragment";
 
+    private static final String KEY_MATCH = "key_match";
+
     public MatchDetailsFragment() {
         // Required empty public constructor
     }
@@ -78,6 +83,11 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
+
+        if(savedInstanceState != null){
+            mMatch = savedInstanceState.getParcelable(KEY_MATCH);
+            mListener.onMatchDetailsFragmentStateChanged(this);
+        }
 
         View view = inflater.inflate(R.layout.fragment_match_details, container, false);
 
@@ -140,10 +150,9 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
         PlayersListTitle = view.findViewById(R.id.tv_detail_players);
         PlayersList = view.findViewById(R.id.lv_players);
 
-        if(mMatch != null)
+        if(mMatch != null){
             reloadMatchData(mMatch);
-
-        loadPlayersList();
+        }
 
         return view;
     }
@@ -168,15 +177,11 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
     public void reloadMatchData(Match match)
     {
         mMatch = match;
-
         Title.setText(mMatch.getTitle());
         Location.setText(mMatch.getLocation());
         Date.setText(mMatch.getDate());
         PlayersListTitle.setText(getActivity().getString(R.string.text_title_detail_player));
-
-        if(!(mMatch.getPlayers() == null || mMatch.getPlayers().size() == 0)){
-            loadPlayersList();
-        }
+        loadPlayersList();
     }
 
     public Match getMatch() {
@@ -190,16 +195,22 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
     public void loadPlayersList()
     {
         if(PlayersList != null && mMatch != null){
-            mPlayerListAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, getPlayersName(mMatch));
-            PlayersList.setAdapter(mPlayerListAdapter);
-            FirebaseChildEventListener.setPlayerAdapter(mPlayerListAdapter);
-        }
-    }
+            if(mPlayerListAdapter == null){
+                mPlayerListAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, getPlayersName(mMatch));
+                PlayersList.setAdapter(mPlayerListAdapter);
+                FirebaseEventListener listener = FirebaseChildEventFactory.getListener(
+                                        FirebaseChildEventFactory.ListenerType.PLAYER,
+                                        mPlayerListAdapter,
+                                        mMatch);
+            }
+            else{
+                mPlayerListAdapter.clear();
+                mPlayerListAdapter.addAll(getPlayersName(mMatch));
+                mPlayerListAdapter.notifyDataSetChanged();
+            }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        loadPlayersList();
+            Log.d("LOG","configuring new adapter:" + Integer.toString(mPlayerListAdapter.getCount()));
+        }
     }
 
     @Override
@@ -261,6 +272,10 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
                 .getInstance().updateMatch(mMatch);
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelable(KEY_MATCH, mMatch);
+    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -274,7 +289,7 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
      */
     public interface MatchDetailsFragmentInteraction{
         void onPickTeamButtonPressed(Match match);
-
+        void onMatchDetailsFragmentStateChanged(Fragment fragment);
     }
 
     class PlayerAlertDialogListener implements DialogInterface.OnClickListener{

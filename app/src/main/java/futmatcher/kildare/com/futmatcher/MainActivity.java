@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import futmatcher.kildare.com.futmatcher.model.Match;
 import futmatcher.kildare.com.futmatcher.ui.CreateMatchFragment;
@@ -34,12 +35,8 @@ public class MainActivity extends AppCompatActivity implements MatchListFragment
     @Override
     public void onCreateMatchButtonPressed() {
         if(mTwoPane){
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            if(mSecondFragment != null)
-                transaction = transaction.remove(mSecondFragment);
             Fragment createMatchFragment = CreateMatchFragment.newInstance();
-            transaction.add(R.id.fl_main_fragments, createMatchFragment).commit();
-            mSecondFragment = createMatchFragment;
+            updateSecondFragment(createMatchFragment);
         }
         else{
             Intent intent = new Intent(MainActivity.this,CreateMatchActivity.class);
@@ -50,13 +47,9 @@ public class MainActivity extends AppCompatActivity implements MatchListFragment
     @Override
     public void onClickMatchItem(Match match) {
         if(mTwoPane){
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            if(mSecondFragment != null)
-                transaction = transaction.remove(mSecondFragment);
             MatchDetailsFragment matchDetailsFragment = MatchDetailsFragment.newInstance();
             matchDetailsFragment.setMatch(match);
-            transaction.add(R.id.fl_main_fragments, matchDetailsFragment).commit();
-            mSecondFragment = matchDetailsFragment;
+            updateSecondFragment(matchDetailsFragment);
         }
         else{
             Intent intent = new Intent(MainActivity.this,MatchDetailActivity.class);
@@ -69,18 +62,34 @@ public class MainActivity extends AppCompatActivity implements MatchListFragment
     @Override
     public void onPickTeamButtonPressed(Match match) {
         if(mTwoPane){
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            if(mSecondFragment != null)
-                transaction = transaction.remove(mSecondFragment);
             PickTeamFragment pickTeamFragment = PickTeamFragment.newInstance();
-            //TODO fazer o alertdialog aparecer quando o fragment de pickteam surgir
-            transaction.add(R.id.fl_main_fragments, pickTeamFragment).commit();
-            mSecondFragment = pickTeamFragment;
+            pickTeamFragment.setMatch(match);
+            updateSecondFragment(pickTeamFragment);
         }
     }
 
     @Override
-    public void onPickTeamCancelled() {
-
+    public void onMatchDetailsFragmentStateChanged(Fragment fragment) {
+        mSecondFragment = fragment;
     }
+
+    private void updateSecondFragment(Fragment fragment)
+    {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if(mSecondFragment != null)
+            transaction = transaction.remove(mSecondFragment);
+        transaction.add(R.id.fl_main_fragments, fragment).commit();
+        mSecondFragment = fragment;
+    }
+
+    @Override
+    public void onPickTeamCancelled() {
+        Toast.makeText(this,getString(R.string.pick_cancelled),Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onPickTeamFragmentStateChanged(Fragment fragment){
+        mSecondFragment = fragment;
+    }
+
 }
