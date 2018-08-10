@@ -7,6 +7,8 @@ import android.widget.ArrayAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
+import java.util.List;
+
 import futmatcher.kildare.com.futmatcher.model.Match;
 import futmatcher.kildare.com.futmatcher.model.Player;
 import futmatcher.kildare.com.futmatcher.ui.MatchDetailsFragment;
@@ -19,16 +21,26 @@ public class FirebasePlayerEventListener extends  FirebaseEventListener{
 
 	private Match mMatch;
 	ArrayAdapter<String> mPlayerNameAdapter;
+
+
+	private void reloadData(Match match)
+	{
+		if(mPlayerNameAdapter != null && mMatch != null && match.getTitle().equals(mMatch.getTitle())){
+			mMatch = match;
+			List<String> array = MatchDetailsFragment.getPlayersName(mMatch);
+			mPlayerNameAdapter.clear();
+			mPlayerNameAdapter.addAll(array);
+			mPlayerNameAdapter.notifyDataSetChanged();
+			System.out.println("Match adapter:" + Integer.toString(mPlayerNameAdapter.getCount()));
+		}
+	}
+
+
 	@Override
 	public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 		if(dataSnapshot.getValue() != null){
-			mMatch= dataSnapshot.getValue(Match.class);
-			if(mPlayerNameAdapter != null){
-				Player player = dataSnapshot.getValue(Player.class);
-				mPlayerNameAdapter.add(player.getName());
-				mPlayerNameAdapter.notifyDataSetChanged();
-				System.out.println("Match adapter:" + Integer.toString(mPlayerNameAdapter.getCount()));
-			}
+			Match match = dataSnapshot.getValue(Match.class);
+			reloadData(match);
 		}
 	}
 
@@ -44,22 +56,14 @@ public class FirebasePlayerEventListener extends  FirebaseEventListener{
 
 	@Override
 	public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-		if(mPlayerNameAdapter != null){
-			mPlayerNameAdapter.clear();
-			mPlayerNameAdapter.addAll(MatchDetailsFragment.getPlayersName(mMatch));
-			mPlayerNameAdapter.notifyDataSetChanged();
-		}
-
+		Match match = dataSnapshot.getValue(Match.class);
+		reloadData(match);
 	}
 
 	@Override
 	public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-		if(mPlayerNameAdapter != null){
-			mPlayerNameAdapter.clear();
-			mPlayerNameAdapter.addAll(MatchDetailsFragment.getPlayersName(mMatch));
-			mPlayerNameAdapter.notifyDataSetChanged();
-		}
+		Match match = dataSnapshot.getValue(Match.class);
+		reloadData(match);
 	}
 
 	@Override

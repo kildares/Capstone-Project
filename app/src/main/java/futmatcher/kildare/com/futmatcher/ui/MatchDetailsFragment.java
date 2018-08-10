@@ -202,6 +202,8 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
                                         FirebaseChildEventFactory.ListenerType.PLAYER,
                                         mPlayerListAdapter,
                                         mMatch);
+                //TODO fix error
+                FutMatcherFirebaseDatabase.getInstance().addChildEventListenerToReference(listener);
             }
             else{
                 mPlayerListAdapter.clear();
