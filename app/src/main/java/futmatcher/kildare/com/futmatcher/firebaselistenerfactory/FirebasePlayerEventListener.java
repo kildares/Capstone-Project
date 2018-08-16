@@ -3,14 +3,10 @@ package futmatcher.kildare.com.futmatcher.firebaselistenerfactory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.ArrayAdapter;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-
 import java.util.List;
-
 import futmatcher.kildare.com.futmatcher.model.Match;
-import futmatcher.kildare.com.futmatcher.model.Player;
 import futmatcher.kildare.com.futmatcher.ui.MatchDetailsFragment;
 
 /**
@@ -21,7 +17,6 @@ public class FirebasePlayerEventListener extends  FirebaseEventListener{
 
 	private Match mMatch;
 	ArrayAdapter<String> mPlayerNameAdapter;
-
 
 	private void reloadData(Match match)
 	{

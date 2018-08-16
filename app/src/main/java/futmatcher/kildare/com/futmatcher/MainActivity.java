@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
+
+import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseChildEventFactory;
 import futmatcher.kildare.com.futmatcher.model.Match;
+import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
 import futmatcher.kildare.com.futmatcher.ui.CreateMatchFragment;
 import futmatcher.kildare.com.futmatcher.ui.MatchDetailsFragment;
 import futmatcher.kildare.com.futmatcher.ui.MatchListFragment;
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements MatchListFragment
         mFragmentView = findViewById(R.id.fl_main_fragments);
         mMatchListFragment = (MatchListFragment) getSupportFragmentManager().findFragmentById(R.id.fr_match_list);
         mTwoPane = (mFragmentView != null);
+
     }
 
 

@@ -20,7 +20,7 @@ public class FirebaseChildEventFactory {
 	private static FirebaseChildEventFactory mEventListener;
 
 	public enum ListenerType{
-		MATCH, PLAYER;
+		MATCH, PLAYER, WIDGET;
 	}
 
 	private FirebaseChildEventFactory()
@@ -36,6 +36,9 @@ public class FirebaseChildEventFactory {
 		else if(Objects.equals(listener, ListenerType.PLAYER)){
 			return new FirebasePlayerEventListener(adapter, match);
 		}
+		else if(Objects.equals(listener, ListenerType.WIDGET)){
+			return new FirebaseWidgetEventListener(adapter);
+		}
 		else
 			throw new UnsupportedOperationException("No listener type found");
 	}
@@ -47,6 +50,8 @@ public class FirebaseChildEventFactory {
 		}
 		else if(Objects.equals(listener, ListenerType.PLAYER)){
 			return new FirebasePlayerEventListener(adapter);
+		}else if(Objects.equals(listener, ListenerType.WIDGET)){
+			return new FirebaseWidgetEventListener(adapter);
 		}
 		else
 			throw new UnsupportedOperationException("No listener type found");
