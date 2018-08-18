@@ -24,7 +24,6 @@ public class MatchesAppWidget extends AppWidgetProvider {
 		intent.putExtra(context.getString(R.string.key_widget_id),appWidgetId);
 
 		views.setRemoteAdapter(R.id.lv_widget_match,intent);
-
 		// Instruct the widget manager to update the widget
 		appWidgetManager.updateAppWidget(appWidgetId, views);
 	}

@@ -2,14 +2,22 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#09C"
+    android:background="@color/colorPrimaryLight"
     android:padding="@dimen/widget_margin"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     >
+
+    <TextView
+        android:text="@string/widget_match_list"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
     <ListView
         android:id="@+id/lv_widget_match"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        />
 
 </LinearLayout>

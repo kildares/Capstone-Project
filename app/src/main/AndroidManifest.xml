@@ -33,6 +33,7 @@
         </receiver>
         
         <service android:name=".widget.MatchesWidgetService"
+
             android:permission="android.permission.BIND_REMOTEVIEWS"
             />
         

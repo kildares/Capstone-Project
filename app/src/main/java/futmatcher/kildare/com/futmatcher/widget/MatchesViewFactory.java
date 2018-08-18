@@ -1,17 +1,24 @@
 package futmatcher.kildare.com.futmatcher.widget;
 
 import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseChildEventFactory;
+import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseEventListener;
 import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
 
 /**
@@ -20,33 +27,34 @@ import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
 
 public class MatchesViewFactory implements RemoteViewsService.RemoteViewsFactory{
 
+	private static final String LOG_TAG = "WIDGET_VIEW_FACTORY";
+
 	private Context mContext;
-	private List<String> mMatches;
+	private static List<String> mMatches;
 	private int mWidgetId;
+
+	private static FirebaseEventListener mFirebaseListener;
 
 	public MatchesViewFactory(Context context,Intent intent){
 		mContext = context;
-		mMatches = intent.getStringArrayListExtra(context.getString(R.string.key_widget_match_list));
 		Bundle bundle = intent.getExtras();
 		mWidgetId = bundle.getInt(mContext.getString(R.string.key_widget_id));
-
-		FutMatcherFirebaseDatabase.getInstance().addChildEventListenerToReference(
-				FirebaseChildEventFactory.getListener(FirebaseChildEventFactory.ListenerType.WIDGET,this));
-	}
-
-	public void setMatches(List<String> matches){
-		mMatches = matches;
 	}
 
 
 	@Override
 	public void onCreate() {
-
+		if(mFirebaseListener == null){
+			FutMatcherFirebaseDatabase.getInstance().addChildEventListenerToReference(
+					FirebaseChildEventFactory.getListener(FirebaseChildEventFactory.ListenerType.WIDGET,this));
+		}
+		if(mMatches  == null)
+			mMatches = convertMatchSetToList();
 	}
 
 	@Override
 	public void onDataSetChanged() {
-
+		mMatches = convertMatchSetToList();
 	}
 
 	@Override
@@ -56,7 +64,10 @@ public class MatchesViewFactory implements RemoteViewsService.RemoteViewsFactory
 
 	@Override
 	public int getCount() {
-		return (mMatches != null) ? mMatches.size() : 0 ;
+		if(mMatches != null)
+			return mMatches.size();
+		else
+			return 0;
 	}
 
 	@Override
@@ -84,14 +95,58 @@ public class MatchesViewFactory implements RemoteViewsService.RemoteViewsFactory
 
 	@Override
 	public boolean hasStableIds() {
-		return true;
+		return false;
 	}
 
 
-	public void updateWidget(List<String> matches){
-		mMatches = matches;
+	public void updateWidget(){
 		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
 		MatchesAppWidget.updateAppWidget(mContext,appWidgetManager,mWidgetId);
+	}
 
+
+	public Set<String> getStoredMatches()
+	{
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+		return preferences.getStringSet(mContext.getString(R.string.key_widget_title_set),new HashSet<String>());
+	}
+
+	public void storeMatches()
+	{
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+		SharedPreferences.Editor editor = preferences.edit();
+		Set<String> set = new HashSet<>(mMatches);
+		editor.putStringSet(mContext.getString(R.string.key_widget_title_set), set);
+		editor.apply();
+	}
+
+
+	public List<String> convertMatchSetToList(){
+		List<String> list = new ArrayList<>();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+			getStoredMatches().forEach(m -> {
+				if (!list.contains(m))
+					list.add(m);
+			});
+		}
+		return list;
+	}
+
+	public void addMatch(String title) {
+		mMatches = convertMatchSetToList();
+		mMatches.add(title);
+		storeMatches();
+		Log.i(LOG_TAG,"MATCH ADDED: " + title);
+		updateWidget();
+	}
+
+	public void replaceMatch(String s, String title) {
+		mMatches.add(title);
+		updateWidget();
+	}
+
+	public void removeMatch(String title) {
+		mMatches.remove(title);
+		updateWidget();
 	}
 }
