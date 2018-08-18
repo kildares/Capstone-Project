@@ -60,6 +60,9 @@
     <string name="key_widget_id">key_widget_id</string>
     <string name="key_widget_title_set">key_widget_title_set</string>
 
+    <string name="key_picked_team">id_team_picked</string>
+    <string name="key_id_match">id_match</string>
+
     <string name="key_two_pane">key_two_pane</string>
 
 </resources>

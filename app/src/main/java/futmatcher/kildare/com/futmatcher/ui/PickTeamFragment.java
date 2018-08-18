@@ -53,8 +53,6 @@ public class PickTeamFragment extends Fragment {
     private static final int TEAM_PICKED_RANDOM = 1;
     private static final int TEAM_PICKED_POSITION = 2;
 
-    private static final String ID_TEAM_PICKED = "id_team_picked";
-    private static final String ID_MATCH = "id_match";
 
     public PickTeamFragment() {
         // Required empty public constructor
@@ -85,8 +83,8 @@ public class PickTeamFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         if(savedInstanceState != null){
-            mTeamPicked = savedInstanceState.getInt(ID_TEAM_PICKED);
-            mMatch = savedInstanceState.getParcelable(ID_MATCH);
+            mTeamPicked = savedInstanceState.getInt(getActivity().getString(R.string.key_picked_team));
+            mMatch = savedInstanceState.getParcelable(getActivity().getString(R.string.key_id_match));
             mListener.onPickTeamFragmentStateChanged(this);
         }
 
@@ -212,7 +210,7 @@ public class PickTeamFragment extends Fragment {
         arrayRes1.notifyDataSetChanged();
 
         ArrayAdapter<String> arrayRes2 = loadListViewPlayers(mMatch.getTeam2().getTeamSubstitutes());
-        mListReserve1.setAdapter(arrayRes2);
+        mListReserve2.setAdapter(arrayRes2);
         arrayRes2.notifyDataSetChanged();
 
         showData();
@@ -247,8 +245,8 @@ public class PickTeamFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putInt(ID_TEAM_PICKED, mTeamPicked);
-        outState.putParcelable(ID_MATCH, mMatch);
+        outState.putInt(getActivity().getString(R.string.key_picked_team), mTeamPicked);
+        outState.putParcelable(getActivity().getString(R.string.key_id_match), mMatch);
     }
 
     /**
