@@ -17,6 +17,7 @@
         android:text="@string/rv_title"
         android:textStyle="bold"
         android:layout_marginLeft="@dimen/marginSize"
+        android:contentDescription="@string/ct_match_list_item_title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,6 +29,7 @@
         android:textColor="@color/colorTextPrimary"
         android:textSize="@dimen/rv_title_size"
         android:layout_marginLeft="@dimen/marginSize"
+        android:contentDescription="@string/ct_match_list_item_title"
         app:layout_constraintLeft_toRightOf="@+id/tv_item_title"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/dummy_text" />
@@ -39,6 +41,7 @@
         android:text="@string/rv_location"
         android:textStyle="bold"
         android:layout_marginLeft="@dimen/marginSize"
+        android:contentDescription="@string/ct_match_list_item_location"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tv_list_match_location"
         app:layout_constraintTop_toBottomOf="@+id/tv_item_title"
@@ -51,6 +54,7 @@
         android:textColor="@color/colorTextSecondary"
         android:textSize="@dimen/rv_location_size"
         android:layout_marginLeft="@dimen/marginSize"
+        android:contentDescription="@string/ct_match_list_item_location"
         app:layout_constraintLeft_toRightOf="@+id/tv_item_location"
         app:layout_constraintTop_toBottomOf="@+id/tv_item_title"
         tools:text="@string/dummy_text"
@@ -64,6 +68,7 @@
         android:text="@string/rv_date"
         android:textStyle="bold"
         android:layout_marginLeft="@dimen/marginSize"
+        android:contentDescription="@string/ct_match_list_item_date"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_item_location"
 
@@ -76,6 +81,7 @@
         android:textColor="@color/colorTextSecondary"
         android:textSize="@dimen/rv_date_size"
         android:layout_marginLeft="@dimen/marginSize"
+        android:contentDescription="@string/ct_match_list_item_date"
         app:layout_constraintLeft_toRightOf="@+id/tv_item_date"
         app:layout_constraintTop_toBottomOf="@+id/tv_item_location"
         tools:text="@string/dummy_text" />

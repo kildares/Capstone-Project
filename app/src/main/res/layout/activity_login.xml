@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="futmatcher.kildare.com.futmatcher.LoginActivity"
+    android:orientation="vertical"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/ct_create_toolbar"
+        style="@style/ToolbarFutTheme"
+        android:layout_weight="0.5"
+        >
+
+        <TextView
+            android:text="@string/login_title"
+            android:contentDescription="@string/ct_create_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TitleFutTheme"
+            />
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:text="@string/login_welcome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:textAlignment="center"
+        style="@style/FutTheme"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/marginSize"
+        android:layout_marginRight="@dimen/marginSize"
+        android:layout_marginTop="@dimen/marginSize"
+        android:layout_marginBottom="@dimen/marginSize"
+        />
+
+    <Button
+        android:id="@+id/bt_login"
+        android:text="@string/login_enter_button"
+        android:layout_marginLeft="@dimen/marginSize"
+        android:layout_marginRight="@dimen/marginSize"
+        android:layout_marginTop="@dimen/marginSize"
+        android:layout_marginBottom="@dimen/marginSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        />
+
+</LinearLayout>

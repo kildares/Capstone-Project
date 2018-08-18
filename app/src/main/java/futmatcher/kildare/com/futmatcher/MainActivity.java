@@ -1,13 +1,21 @@
 package futmatcher.kildare.com.futmatcher;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import futmatcher.kildare.com.futmatcher.login.FirebaseLogout;
 import futmatcher.kildare.com.futmatcher.model.Match;
 import futmatcher.kildare.com.futmatcher.ui.CreateMatchFragment;
 import futmatcher.kildare.com.futmatcher.ui.MatchDetailsFragment;
@@ -28,6 +36,21 @@ public class MainActivity extends AppCompatActivity implements  MatchListFragmen
     protected void onSaveInstanceState(Bundle outState) {
         outState.putBoolean(getString(R.string.key_two_pane),mIsTwoPane);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(getString(R.string.logout_dialog_title)).setPositiveButton(getString(R.string.logout_dialog_positive), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                FirebaseLogout.logout(MainActivity.this);
+            }
+        })
+        .setNegativeButton(getString(R.string.logout_dialog_negative),null)
+        .create().show();
+
     }
 
     @Override

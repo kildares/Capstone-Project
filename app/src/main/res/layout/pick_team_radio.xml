@@ -8,6 +8,7 @@
         <RadioButton
             android:id="@+id/rb_position"
             android:text="@string/text_pick_radio_position"
+            android:contentDescription="@string/ct_radio_by_position"
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,5 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/text_pick_radio_random" />
+            android:text="@string/text_pick_radio_random"
+            android:contentDescription="@string/ct_radio_randomly"
+            />
 </RadioGroup>

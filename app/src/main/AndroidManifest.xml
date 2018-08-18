@@ -12,11 +12,6 @@
         <uses-library android:name="android.test.runner" />
 
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".CreateMatchActivity" />
         <activity android:name=".MatchDetailActivity" />
@@ -31,12 +26,18 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
-        
-        <service android:name=".widget.MatchesWidgetService"
 
-            android:permission="android.permission.BIND_REMOTEVIEWS"
-            />
-        
+        <service
+            android:name=".widget.MatchesWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
