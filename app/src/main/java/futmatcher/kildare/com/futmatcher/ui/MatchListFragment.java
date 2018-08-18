@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import futmatcher.kildare.com.futmatcher.MatchUtils;
 import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseChildEventFactory;
 import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseEventListener;
@@ -67,14 +69,12 @@ public class MatchListFragment extends Fragment implements MatchAdapter.OnMatchI
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if(mListener != null)
                     mListener.onCreateMatchButtonPressed();
             }
         });
 
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
 
         mRVMatches.setLayoutManager(layoutManager);
         mAdapter = new MatchAdapter(getActivity(), new ArrayList<Match>(), this);

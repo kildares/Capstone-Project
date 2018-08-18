@@ -141,12 +141,19 @@ public class MatchesViewFactory implements RemoteViewsService.RemoteViewsFactory
 	}
 
 	public void replaceMatch(String s, String title) {
+		mMatches = convertMatchSetToList();
+		mMatches.remove(s);
 		mMatches.add(title);
+		storeMatches();
+		Log.i(LOG_TAG,"MATCH UPDATED: " + title);
 		updateWidget();
 	}
 
 	public void removeMatch(String title) {
+		mMatches = convertMatchSetToList();
 		mMatches.remove(title);
+		storeMatches();
+		Log.i(LOG_TAG,"MATCH REMOVED: " + title);
 		updateWidget();
 	}
 }

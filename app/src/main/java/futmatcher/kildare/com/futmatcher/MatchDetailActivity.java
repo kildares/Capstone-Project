@@ -22,8 +22,8 @@ public class MatchDetailActivity extends AppCompatActivity implements MatchDetai
 		Match match = bundle.getParcelable(getString(R.string.bndl_match));
 
 		mFragment = (MatchDetailsFragment) getSupportFragmentManager().findFragmentById(R.id.fr_match_detail);
-
 		mFragment.reloadMatchData(match);
+		MatchUtils.screenWidth(getResources().getConfiguration());
 	}
 
 	@Override

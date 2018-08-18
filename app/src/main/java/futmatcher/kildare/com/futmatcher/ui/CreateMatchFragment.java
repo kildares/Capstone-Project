@@ -32,6 +32,7 @@ public class CreateMatchFragment extends Fragment {
     EditText mMinPlayers;
     EditText mMaxPlayers;
     Spinner mNumPlayers;
+    CreateMatchFragmentInteraction mListener;
 
     public static final String LOG_TAG = "CreateMatchFragment";
 
@@ -62,7 +63,10 @@ public class CreateMatchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
+        if(savedInstanceState != null){
+        }
+
         View view = inflater.inflate(R.layout.fragment_create_match, container, false);
 
         mCreateButton =  view.findViewById(R.id.bt_create_match);
@@ -74,25 +78,35 @@ public class CreateMatchFragment extends Fragment {
         mMinPlayers = view.findViewById(R.id.et_min_players);
         mNumPlayers = view.findViewById(R.id.sp_num_players);
 
-        mCreateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mCreateButton.setOnClickListener(listener -> {
 
-                String title = mMatchTitle.getText().toString();
-                String location = mMatchLocation.getText().toString();
-                String date = mMatchDate.getText().toString();
-                if(!title.isEmpty() && !location.isEmpty() && !date.isEmpty() && isValidMinPlayers() && isValidMaxPlayers()){
-                    createMatch();
-                }
-                else{
-                    Log.i(LOG_TAG ,"Unable to create match");
-                    Toast.makeText(getActivity(),getActivity().getString(R.string.toast_missing_field),Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+			String title = mMatchTitle.getText().toString();
+			String location = mMatchLocation.getText().toString();
+			String date = mMatchDate.getText().toString();
+			if(!title.isEmpty() && !location.isEmpty() && !date.isEmpty() && isValidMinPlayers() && isValidMaxPlayers()){
+				createMatch();
+                mListener.onMatchCreated();
+			}
+			else{
+				Log.i(LOG_TAG ,"Unable to create match");
+				Toast.makeText(getActivity(),getActivity().getString(R.string.toast_missing_field),Toast.LENGTH_LONG).show();
+			}
+		});
 
         return view;
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof CreateMatchFragmentInteraction) {
+            mListener = (CreateMatchFragmentInteraction) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement CreateMatchFragmentInteraction");
+        }
+    }
+
 
     public boolean isValidMaxPlayers()
     {
@@ -124,5 +138,11 @@ public class CreateMatchFragment extends Fragment {
         Log.i(LOG_TAG,"Creating Match");
     }
 
+
+    public interface CreateMatchFragmentInteraction
+    {
+        void onCreateMatchFragmentStateChanged();
+        void onMatchCreated();
+    }
 
 }

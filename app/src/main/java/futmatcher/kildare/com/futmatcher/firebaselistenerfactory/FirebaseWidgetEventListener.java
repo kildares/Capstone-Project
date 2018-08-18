@@ -19,7 +19,6 @@ import futmatcher.kildare.com.futmatcher.widget.MatchesViewFactory;
 
 public class FirebaseWidgetEventListener extends FirebaseEventListener {
 
-	private static String LOG_TAG = "LOG_WIDGET";
 	MatchesViewFactory mAdapter;
 
 	public FirebaseWidgetEventListener(Object adapter){
@@ -35,7 +34,6 @@ public class FirebaseWidgetEventListener extends FirebaseEventListener {
 		if(dataSnapshot.getValue(Match.class) != null){
 			Match match = dataSnapshot.getValue(Match.class);
 			mAdapter.addMatch(match.getTitle());
-
 		}
 	}
 
@@ -43,7 +41,7 @@ public class FirebaseWidgetEventListener extends FirebaseEventListener {
 	public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 		if(dataSnapshot.getValue(Match.class) != null){
 			Match match = dataSnapshot.getValue(Match.class);
-			Log.i(LOG_TAG, "changed match: " + match.getTitle());
+			mAdapter.replaceMatch(s, match.getTitle());
 		}
 	}
 
@@ -51,7 +49,7 @@ public class FirebaseWidgetEventListener extends FirebaseEventListener {
 	public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 		if(dataSnapshot.getValue(Match.class) != null){
 			Match match = dataSnapshot.getValue(Match.class);
-			Log.i(LOG_TAG, "removed match: " + match.getTitle());
+			mAdapter.removeMatch(match.getTitle());
 		}
 	}
 

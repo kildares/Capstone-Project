@@ -41,6 +41,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_title"
+        android:layout_marginLeft="@dimen/marginSize"
+        android:layout_marginRight="@dimen/marginSize"
         app:layout_constraintTop_toBottomOf="@+id/tb_create_match"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -64,6 +66,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_match_location"
+        android:layout_marginLeft="@dimen/marginSize"
+        android:layout_marginRight="@dimen/marginSize"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_match_title"
@@ -85,7 +89,7 @@
 
     <EditText
         android:id="@+id/et_match_date"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/create_match_date_width"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/sp_num_players"
@@ -125,7 +129,7 @@
 
     <EditText
         android:id="@+id/et_min_players"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/create_match_num_players_width"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/et_max_players"
@@ -145,7 +149,7 @@
 
     <EditText
         android:id="@+id/et_max_players"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/create_match_num_players_width"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/et_min_players"
@@ -157,6 +161,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_create"
+        android:layout_marginTop="@dimen/marginSize"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_max_players" />

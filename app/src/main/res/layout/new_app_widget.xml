@@ -8,11 +8,11 @@
     >
 
     <TextView
-        android:text="@string/widget_match_list"
-        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:text="@string/widget_match_list"
+        android:textAlignment="center"
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/lv_widget_match"

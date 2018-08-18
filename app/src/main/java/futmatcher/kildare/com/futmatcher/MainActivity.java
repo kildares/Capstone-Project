@@ -8,22 +8,27 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.google.firebase.database.FirebaseDatabase;
-
-import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseChildEventFactory;
 import futmatcher.kildare.com.futmatcher.model.Match;
-import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
 import futmatcher.kildare.com.futmatcher.ui.CreateMatchFragment;
 import futmatcher.kildare.com.futmatcher.ui.MatchDetailsFragment;
 import futmatcher.kildare.com.futmatcher.ui.MatchListFragment;
 import futmatcher.kildare.com.futmatcher.ui.PickTeamFragment;
 
-public class MainActivity extends AppCompatActivity implements MatchListFragment.MatchListFragmentInteraction, MatchDetailsFragment.MatchDetailsFragmentInteraction, PickTeamFragment.PickTeamFragmentInteraction {
+public class MainActivity extends AppCompatActivity implements  MatchListFragment.MatchListFragmentInteraction,
+                                                                MatchDetailsFragment.MatchDetailsFragmentInteraction,
+                                                                PickTeamFragment.PickTeamFragmentInteraction,
+                                                                CreateMatchFragment.CreateMatchFragmentInteraction {
 
-    private boolean mTwoPane;
     MatchListFragment mMatchListFragment;
     FrameLayout mFragmentView;
     Fragment mSecondFragment;
+    Boolean mIsTwoPane;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(getString(R.string.key_two_pane),mIsTwoPane);
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +37,17 @@ public class MainActivity extends AppCompatActivity implements MatchListFragment
 
         mFragmentView = findViewById(R.id.fl_main_fragments);
         mMatchListFragment = (MatchListFragment) getSupportFragmentManager().findFragmentById(R.id.fr_match_list);
-        mTwoPane = (mFragmentView != null);
 
+        if(savedInstanceState != null)
+            mIsTwoPane = savedInstanceState.getBoolean(getString(R.string.key_two_pane));
+        else
+            mIsTwoPane = mFragmentView != null;
     }
 
 
     @Override
     public void onCreateMatchButtonPressed() {
-        if(mTwoPane){
+        if(mIsTwoPane){
             Fragment createMatchFragment = CreateMatchFragment.newInstance();
             updateSecondFragment(createMatchFragment);
         }
@@ -51,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements MatchListFragment
 
     @Override
     public void onClickMatchItem(Match match) {
-        if(mTwoPane){
+        if(mIsTwoPane ){
             MatchDetailsFragment matchDetailsFragment = MatchDetailsFragment.newInstance();
             matchDetailsFragment.setMatch(match);
             updateSecondFragment(matchDetailsFragment);
@@ -63,10 +71,9 @@ public class MainActivity extends AppCompatActivity implements MatchListFragment
         }
     }
 
-
     @Override
     public void onPickTeamButtonPressed(Match match) {
-        if(mTwoPane){
+        if(mIsTwoPane ){
             PickTeamFragment pickTeamFragment = PickTeamFragment.newInstance();
             pickTeamFragment.setMatch(match);
             updateSecondFragment(pickTeamFragment);
@@ -97,4 +104,13 @@ public class MainActivity extends AppCompatActivity implements MatchListFragment
         mSecondFragment = fragment;
     }
 
+
+    @Override
+    public void onCreateMatchFragmentStateChanged() {
+    }
+
+    @Override
+    public void onMatchCreated() {
+
+    }
 }

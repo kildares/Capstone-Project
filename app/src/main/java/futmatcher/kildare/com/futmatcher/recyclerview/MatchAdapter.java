@@ -42,9 +42,9 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
     @Override
     public void onBindViewHolder(@NonNull MatchViewHolder holder, int position) {
 
-        holder.MatchTitle.setText(mContext.getString(R.string.rv_title)+ " " + Matches.get(position).getTitle());
-        holder.MatchDate.setText(mContext.getString(R.string.rv_date)+ " " + Matches.get(position).getDate());
-        holder.MatchLocation.setText(mContext.getString(R.string.rv_location)+ " " + Matches.get(position).getLocation());
+        holder.MatchTitle.setText(Matches.get(position).getTitle());
+        holder.MatchDate.setText(Matches.get(position).getDate());
+        holder.MatchLocation.setText(Matches.get(position).getLocation());
 
     }
 

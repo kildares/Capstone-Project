@@ -55,9 +55,11 @@
     <string name="alert_positive_button">Update Player</string>
     <string name="pick_cancelled">unable to pick teams</string>
 
-    <string name="widget_match_list">Registered Matches:</string>
+    <string name="widget_match_list">Your Available Matches</string>
     <string name="key_widget_match_list">key_widget_match_list</string>
     <string name="key_widget_id">key_widget_id</string>
     <string name="key_widget_title_set">key_widget_title_set</string>
+
+    <string name="key_two_pane">key_two_pane</string>
 
 </resources>
