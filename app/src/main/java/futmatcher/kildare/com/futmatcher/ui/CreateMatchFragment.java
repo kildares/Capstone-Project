@@ -1,7 +1,7 @@
 package futmatcher.kildare.com.futmatcher.ui;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,12 +13,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.model.Match;
-import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
-
+import futmatcher.kildare.com.futmatcher.persistence.FirebaseIntentService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,7 +90,7 @@ public class CreateMatchFragment extends Fragment {
                 mListener.onMatchCreated();
 			}
 			else{
-				Log.i(LOG_TAG ,"Unable to create match");
+				Log.i(LOG_TAG ,getActivity().getString(R.string.error_create_match));
 				Toast.makeText(getActivity(),getActivity().getString(R.string.toast_missing_field),Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -128,8 +128,13 @@ public class CreateMatchFragment extends Fragment {
         Integer year = Integer.parseInt(date.substring(6,8));
         if(day == null || month == null || year == null)
             return false;
-        LocalDate convertedDate = LocalDate.of(day, month, year);
-        return convertedDate != null;
+        try {
+			LocalDate convertedDate = LocalDate.of(day, month, year);
+			return convertedDate != null;
+		}catch(DateTimeException e){
+        	Toast.makeText(getActivity(), getActivity().getString(R.string.match_invalid_date), Toast.LENGTH_LONG);
+        	return false;
+		}
     }
 
     @Override
@@ -157,7 +162,7 @@ public class CreateMatchFragment extends Fragment {
     {
         Integer num = Integer.parseInt(mNumPlayers.getSelectedItem().toString());
         Integer minPlayers = Integer.parseInt(mMinPlayers.getText().toString());
-        return minPlayers <= (2*num);
+        return minPlayers >= (2*num);
     }
 
     public void createMatch()
@@ -169,9 +174,10 @@ public class CreateMatchFragment extends Fragment {
         String minPlayers = mMinPlayers.getText().toString();
         Match match = new Match(title, location, date, mNumPlayers.getSelectedItem().toString(), minPlayers, maxPlayers);
 
-        FutMatcherFirebaseDatabase firebaseDatabase = FutMatcherFirebaseDatabase.getInstance();
-        firebaseDatabase.addMatch(match);
-        Log.i(LOG_TAG,"Creating Match");
+        Intent intent = new Intent(getActivity(), FirebaseIntentService.class);
+        intent.putExtra(getActivity().getString(R.string.bndl_match), match);
+        intent.setAction(getActivity().getString(R.string.action_create_match));
+        getActivity().startService(intent);
     }
 
 

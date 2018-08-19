@@ -31,6 +31,11 @@
             android:name=".widget.MatchesWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
+        <service
+            android:name=".persistence.FirebaseIntentService"
+            android:exported="false"
+            />
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

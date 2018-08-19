@@ -1,6 +1,7 @@
 package futmatcher.kildare.com.futmatcher.ui;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.content.Context;
@@ -30,6 +31,7 @@ import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseEventListener;
 import futmatcher.kildare.com.futmatcher.model.Match;
 import futmatcher.kildare.com.futmatcher.model.Player;
+import futmatcher.kildare.com.futmatcher.persistence.FirebaseIntentService;
 import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
 
 
@@ -204,7 +206,6 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
                                         FirebaseChildEventFactory.ListenerType.PLAYER,
                                         mPlayerListAdapter,
                                         mMatch);
-                //TODO fix error
                 FutMatcherFirebaseDatabase.getInstance().addChildEventListenerToReference(listener);
             }
             else{
@@ -261,19 +262,30 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
     {
         Player player = new Player(Name, Position);
         mMatch.addPlayerToMatch(player);
-        FutMatcherFirebaseDatabase.getInstance().updateMatch(mMatch);
+
+        Intent intent = new Intent(getActivity(), FirebaseIntentService.class);
+        intent.putExtra(getActivity().getString(R.string.bndl_match), mMatch);
+        intent.setAction(getActivity().getString(R.string.action_add_player));
+        getActivity().startService(intent);
     }
 
     @Override
     public void editPlayer(Player player) {
-        FutMatcherFirebaseDatabase.getInstance().updateMatch(mMatch);
+
+        Intent intent = new Intent(getActivity(), FirebaseIntentService.class);
+        intent.putExtra(getActivity().getString(R.string.bndl_match), mMatch);
+        intent.setAction(getActivity().getString(R.string.action_edit_player));
+        getActivity().startService(intent);
     }
 
     @Override
     public void removePlayer(Player player) {
         mMatch.removePlayerFromMatch(player);
-        FutMatcherFirebaseDatabase
-                .getInstance().updateMatch(mMatch);
+
+        Intent intent = new Intent(getActivity(), FirebaseIntentService.class);
+        intent.putExtra(getActivity().getString(R.string.bndl_match), mMatch);
+        intent.setAction(getActivity().getString(R.string.action_remove_player));
+        getActivity().startService(intent);
     }
 
     @Override

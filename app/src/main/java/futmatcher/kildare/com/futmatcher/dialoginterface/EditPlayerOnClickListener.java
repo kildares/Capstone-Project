@@ -25,8 +25,12 @@ public class EditPlayerOnClickListener implements DialogInterface.OnClickListene
 	public void onClick(DialogInterface dialogInterface, int i) {
 		switch(i){
 			case DialogInterface.BUTTON_POSITIVE:{
-				mPlayer.setName(mPlayerNameView.getText().toString());
-				mListener.editPlayer(mPlayer);
+
+				String newPlayerName = mPlayerNameView.getText().toString();
+				if(!mPlayer.getName().equals(newPlayerName) && newPlayerName.length() > 0){
+					mPlayer.setName(newPlayerName);
+					mListener.editPlayer(mPlayer);
+				}
 				dialogInterface.dismiss();
 				break;
 			}

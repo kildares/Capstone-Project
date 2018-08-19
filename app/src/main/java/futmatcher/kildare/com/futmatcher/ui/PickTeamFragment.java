@@ -123,14 +123,8 @@ public class PickTeamFragment extends Fragment {
         RadioButton by_position = getActivity().findViewById(R.id.rb_position);
         try{
             if(selectedId == by_position.getId()){
-                try{
-                    mMatch.pickTeamsByPosition();
-                    mTeamPicked = TEAM_PICKED_POSITION;
-                }catch(RuntimeException e){
-                    String message = getActivity().getString(R.string.error_pick_team_unavailable);
-                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
-                    Log.w("Pick Team", message);
-                }
+                mMatch.pickTeamsByPosition();
+                mTeamPicked = TEAM_PICKED_POSITION;
             }
             else{
                 mMatch.pickTeamsRandomly();
@@ -142,10 +136,9 @@ public class PickTeamFragment extends Fragment {
             if(mTeamPicked == TEAM_NOT_PICKED_CODE)
                 mListener.onPickTeamCancelled();
             else
-                Toast.makeText(getActivity(), getActivity().getString(R.string.toast_not_enough_players), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getActivity().getString(R.string.toast_could_not_pick), Toast.LENGTH_LONG).show();
         }
     }
-
 
     public void emptyData()
     {

@@ -41,13 +41,17 @@
     <string name="alert_add_negative">Cancel</string>
 
     <string name="toast_no_players">No players registered</string>
-    <string name="toast_not_enough_players">Not enough players registered</string>
+    <string name="toast_could_not_pick">Could not pick teams</string>
+    <string name="toast_not_enough_players">Not enought players</string>
 
     <string name="alert_pick_positive">Pick</string>
     <string name="alert_pick_negative">Cancel</string>
 
     <string name="toast_missing_field">Please input all fields</string>
     <string name="error_pick_team_unavailable">Picking teams by position for this match configuration is currently unavailable</string>
+    <string name="error_invalid_date">Please input a valid date</string>
+    <string name="error_create_match">Unable to create match</string>
+    <string name="creating_match">Creating match</string>
 
     <string name="details_location">Location:</string>
     <string name="details_date">Date:</string>
@@ -69,7 +73,8 @@
 
     <string name="match_title_length_too_small">The match title must have at least 5 characters</string>
     <string name="match_location_length_too_small">The match location must have at least 5 characters</string>
-    <string name="match_date_hint">31/01/18</string>
+    <string name="match_date_hint">dd/mm/yy</string>
+    <string name="match_invalid_date">Invalid match date</string>
 
     <string name="logout_dialog_title">Do you want to logout?</string>
     <string name="logout_dialog_positive">Yes</string>
@@ -80,6 +85,12 @@
     <string name="login_welcome">Welcome! This is the best way to meet people to play sports and have fun. Please press the button below to login</string>
     <string name="login_enter_button">Enter</string>
     <string name="login_error_message">Sorry, we could not login. Please try again.</string>
+
+    <string name="log_tag_firebase_service">FirebaseService</string>
+    <string name="action_create_match">CREATE_MATCH</string>
+    <string name="action_add_player">ADD_PLAYER</string>
+    <string name="action_edit_player">EDIT_PLAYER</string>
+    <string name="action_remove_player">REMOVE_PLAYER</string>
 
     <string name="ct_desc_toolbar">Match Details Title</string>
     <string name="ct_desc_location">Match Location</string>

@@ -31,7 +31,6 @@ public class PickTeamActivity extends AppCompatActivity implements PickTeamFragm
 
 	@Override
 	public void onPickTeamCancelled() {
-		Toast.makeText(this,"Could not pick teams",Toast.LENGTH_LONG).show();
 		onBackPressed();
 	}
 
