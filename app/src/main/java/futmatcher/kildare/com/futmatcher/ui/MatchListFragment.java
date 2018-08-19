@@ -5,21 +5,15 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
-import futmatcher.kildare.com.futmatcher.MatchUtils;
 import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseChildEventFactory;
 import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseEventListener;
-import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseMatchEventListener;
 import futmatcher.kildare.com.futmatcher.model.Match;
 import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
 import futmatcher.kildare.com.futmatcher.recyclerview.MatchAdapter;
@@ -82,7 +76,7 @@ public class MatchListFragment extends Fragment implements MatchAdapter.OnMatchI
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
 
         mRVMatches.setLayoutManager(layoutManager);
-        mAdapter = new MatchAdapter(getActivity(), new ArrayList<Match>(), this);
+        mAdapter = new MatchAdapter(getActivity(), new ArrayList<>(), this);
 
         FirebaseEventListener eventListener = FirebaseChildEventFactory.getListener(FirebaseChildEventFactory.ListenerType.MATCH, mAdapter);
         FutMatcherFirebaseDatabase.getInstance().addChildEventListenerToReference(eventListener);

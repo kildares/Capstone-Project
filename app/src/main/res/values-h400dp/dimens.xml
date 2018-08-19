@@ -4,7 +4,6 @@
     <dimen name="titleTextSize">22sp</dimen>
     <dimen name="marginSize">4dp</dimen>
 
-    <dimen name="sp_width">24dp</dimen>
     <dimen name="fab_margin">24dp</dimen>
     <dimen name="rv_title_size">16sp</dimen>
     <dimen name="rv_date_size">14sp</dimen>

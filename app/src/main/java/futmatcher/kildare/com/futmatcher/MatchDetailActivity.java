@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import futmatcher.kildare.com.futmatcher.model.Match;
 import futmatcher.kildare.com.futmatcher.ui.MatchDetailsFragment;
-import futmatcher.kildare.com.futmatcher.ui.MatchListFragment;
 
 public class MatchDetailActivity extends AppCompatActivity implements MatchDetailsFragment.MatchDetailsFragmentInteraction {
 

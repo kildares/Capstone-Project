@@ -1,6 +1,5 @@
 package futmatcher.kildare.com.futmatcher;
 
-import android.content.Context;
 import android.content.res.Configuration;
 import android.util.Log;
 

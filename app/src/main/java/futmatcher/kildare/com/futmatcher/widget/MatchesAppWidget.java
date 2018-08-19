@@ -1,6 +1,5 @@
 package futmatcher.kildare.com.futmatcher.widget;
 
-import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;

@@ -2,7 +2,6 @@ package futmatcher.kildare.com.futmatcher.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -183,7 +182,7 @@ public class Match implements Parcelable, PickTeam {
 
         while(team.size() < Integer.parseInt(NumPlayers)){
             int pos = random.nextInt(players.length);
-            if(playersUpd[pos] != true){
+            if(!playersUpd[pos]){
                 team.add(getPlayers().get(pos));
                 playersUpd[pos] = true;
             }
@@ -199,8 +198,8 @@ public class Match implements Parcelable, PickTeam {
 
         boolean isTeam1 = true;
 
-        Team1.setTeamSubstitutes(new ArrayList<Player>());
-        Team2.setTeamSubstitutes(new ArrayList<Player>());
+        Team1.setTeamSubstitutes(new ArrayList<>());
+        Team2.setTeamSubstitutes(new ArrayList<>());
 
         for(int i = 0 ; i < players.length ; i++){
             if(!players[i]){
@@ -223,8 +222,8 @@ public class Match implements Parcelable, PickTeam {
     public boolean pickTeamsByPosition()
     {
 
-        Team1 = new Team(new ArrayList<Player>());
-        Team2 = new Team(new ArrayList<Player>());
+        Team1 = new Team(new ArrayList<>());
+        Team2 = new Team(new ArrayList<>());
 
         List<Player> keepers = sortPlayersByPosition(Player.KEEPER);
         List<Player> defense = sortPlayersByPosition(Player.DEFENSE);

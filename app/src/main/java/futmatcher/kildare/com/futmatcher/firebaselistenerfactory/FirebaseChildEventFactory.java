@@ -1,15 +1,6 @@
 package futmatcher.kildare.com.futmatcher.firebaselistenerfactory;
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.widget.ArrayAdapter;
-
-import com.google.firebase.database.DataSnapshot;
-
 import java.util.Objects;
-
 import futmatcher.kildare.com.futmatcher.model.Match;
-import futmatcher.kildare.com.futmatcher.ui.MatchDetailsFragment;
 
 /**
  * Created by kilda on 6/30/2018.
@@ -20,7 +11,7 @@ public class FirebaseChildEventFactory {
 	private static FirebaseChildEventFactory mEventListener;
 
 	public enum ListenerType{
-		MATCH, PLAYER, WIDGET;
+		MATCH, PLAYER, WIDGET
 	}
 
 	private FirebaseChildEventFactory()

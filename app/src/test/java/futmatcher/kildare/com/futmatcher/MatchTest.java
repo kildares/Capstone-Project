@@ -1,7 +1,6 @@
 package futmatcher.kildare.com.futmatcher;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.List;
@@ -18,7 +17,7 @@ import static junit.framework.Assert.assertEquals;
 
 public class MatchTest {
 
-	Match testMatch;
+	private Match testMatch;
 
 	@Before
 	public void initializeMatch()

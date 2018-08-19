@@ -124,7 +124,7 @@
         android:layout_height="@dimen/pick_list_view_height"
         android:layout_marginRight="@dimen/marginSize"
         android:layout_marginLeft="@dimen/marginSize"
-        android:contentDescription="@string/ct_pick_res2_list"
+        android:contentDescription="@string/ct_pick_res1_list"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/lv_reserve2"
         app:layout_constraintTop_toBottomOf="@+id/tv_reserve1" />

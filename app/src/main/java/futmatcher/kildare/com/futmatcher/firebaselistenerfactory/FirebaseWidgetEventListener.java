@@ -2,15 +2,9 @@ package futmatcher.kildare.com.futmatcher.firebaselistenerfactory;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-
-
-import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.model.Match;
-import futmatcher.kildare.com.futmatcher.widget.MatchesAppWidget;
 import futmatcher.kildare.com.futmatcher.widget.MatchesViewFactory;
 
 /**

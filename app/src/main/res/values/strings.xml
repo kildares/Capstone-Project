@@ -42,14 +42,11 @@
 
     <string name="toast_no_players">No players registered</string>
     <string name="toast_could_not_pick">Could not pick teams</string>
-    <string name="toast_not_enough_players">Not enought players</string>
+    <string name="toast_not_enough_players">Not enough players</string>
 
     <string name="alert_pick_positive">Pick</string>
-    <string name="alert_pick_negative">Cancel</string>
 
     <string name="toast_missing_field">Please input all fields</string>
-    <string name="error_pick_team_unavailable">Picking teams by position for this match configuration is currently unavailable</string>
-    <string name="error_invalid_date">Please input a valid date</string>
     <string name="error_create_match">Unable to create match</string>
     <string name="creating_match">Creating match</string>
 
@@ -62,7 +59,6 @@
     <string name="pick_cancelled">unable to pick teams</string>
 
     <string name="widget_match_list">Your Available Matches</string>
-    <string name="key_widget_match_list">key_widget_match_list</string>
     <string name="key_widget_id">key_widget_id</string>
     <string name="key_widget_title_set">key_widget_title_set</string>
 
@@ -81,7 +77,6 @@
     <string name="logout_dialog_negative">No</string>
     <string name="logout_toast_message">Signed out successfully</string>
 
-    <string name="login_title">Login</string>
     <string name="login_welcome">Welcome! This is the best way to meet people to play sports and have fun. Please press the button below to login</string>
     <string name="login_enter_button">Enter</string>
     <string name="login_error_message">Sorry, we could not login. Please try again.</string>
@@ -92,6 +87,7 @@
     <string name="action_edit_player">EDIT_PLAYER</string>
     <string name="action_remove_player">REMOVE_PLAYER</string>
 
+    <string name="ct_login_img">Image of a football pitch</string>
     <string name="ct_desc_toolbar">Match Details Title</string>
     <string name="ct_desc_location">Match Location</string>
     <string name="ct_desc_date">Match Date</string>
@@ -101,11 +97,8 @@
 
     <string name="ct_create_toolbar">Create Match Toolbar</string>
     <string name="ct_create_title">Create Match Title</string>
-    <string name="ct_create_title_input">Input Match Title</string>
     <string name="ct_create_location">Create Match Location</string>
-    <string name="ct_create_location_input">Input Match Location</string>
     <string name="ct_create_date">Create Match Date</string>
-    <string name="ct_create_date_input">Input Match Date</string>
     <string name="ct_create_num_players">Create Match Number of Players</string>
     <string name="ct_create_num_players_spinner">Choose Match number of players</string>
     <string name="ct_create_min_num_players">Create Match minimum number of players</string>

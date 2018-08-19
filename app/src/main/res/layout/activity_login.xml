@@ -14,6 +14,7 @@
         android:layout_weight="0.5"
         android:scaleType="centerCrop"
         android:elevation="6dp"
+        android:contentDescription="@string/ct_login_img"
         app:srcCompat="@drawable/footballpitch" />
 
 
@@ -24,7 +25,7 @@
         android:layout_weight="0.5"
         android:elevation="6dp"
         android:gravity="center"
-        android:text="FutMatcher"
+        android:text="@string/app_name"
         android:textSize="30sp"
         android:textStyle="italic" />
 

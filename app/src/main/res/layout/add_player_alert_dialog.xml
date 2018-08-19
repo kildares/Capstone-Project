@@ -10,9 +10,9 @@
         android:id="@+id/et_add_player_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="text"
         android:hint="@string/alert_hint_player_name"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/ct_dialog_add_player_edit"
         app:layout_constraintBottom_toTopOf="@+id/sp_add_player_position"
         />
 

@@ -108,7 +108,7 @@ public class MatchesViewFactory implements RemoteViewsService.RemoteViewsFactory
 	public Set<String> getStoredMatches()
 	{
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-		return preferences.getStringSet(mContext.getString(R.string.key_widget_title_set),new HashSet<String>());
+		return preferences.getStringSet(mContext.getString(R.string.key_widget_title_set),new HashSet<>());
 	}
 
 	public void storeMatches()
@@ -123,12 +123,10 @@ public class MatchesViewFactory implements RemoteViewsService.RemoteViewsFactory
 
 	public List<String> convertMatchSetToList(){
 		List<String> list = new ArrayList<>();
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			getStoredMatches().forEach(m -> {
-				if (!list.contains(m))
-					list.add(m);
-			});
-		}
+		getStoredMatches().forEach(m -> {
+			if (!list.contains(m))
+				list.add(m);
+		});
 		return list;
 	}
 

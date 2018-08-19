@@ -132,7 +132,7 @@ public class CreateMatchFragment extends Fragment {
 			LocalDate convertedDate = LocalDate.of(day, month, year);
 			return convertedDate != null;
 		}catch(DateTimeException e){
-        	Toast.makeText(getActivity(), getActivity().getString(R.string.match_invalid_date), Toast.LENGTH_LONG);
+        	Toast.makeText(getActivity(), getActivity().getString(R.string.match_invalid_date), Toast.LENGTH_LONG).show();
         	return false;
 		}
     }

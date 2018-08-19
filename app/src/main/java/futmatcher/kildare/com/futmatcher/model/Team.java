@@ -2,10 +2,8 @@ package futmatcher.kildare.com.futmatcher.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import paperparcel.PaperParcel;
 
