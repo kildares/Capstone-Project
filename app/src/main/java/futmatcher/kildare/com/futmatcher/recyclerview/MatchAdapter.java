@@ -50,10 +50,14 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
 
     @Override
     public int getItemCount() {
-        if(Matches == null)
+        if(Matches == null){
+            mListener.onMatchesAvailable(0);
             return 0;
-        else
+        }
+        else{
+            mListener.onMatchesAvailable(Matches.size());
             return Matches.size();
+        }
     }
 
     public void addMatch(Match match)
@@ -114,6 +118,8 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
     public interface OnMatchItemClickListener
     {
         void onClickMatchItem(Match match);
+        void onMatchesAvailable(int numMatches);
+
     }
 
 

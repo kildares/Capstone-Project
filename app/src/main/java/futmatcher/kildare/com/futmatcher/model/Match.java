@@ -231,9 +231,8 @@ public class Match implements Parcelable, PickTeam {
         List<Player> midfield = sortPlayersByPosition(Player.MIDFIELD);
         List<Player> attack = sortPlayersByPosition(Player.ATTACK);
 
-        if(keepers.size() < 2 || defense.size() < 8 || midfield.size() < 8){
-			Log.i("PICK","Not enough players");
-			throw new RuntimeException();
+        if(Integer.parseInt(this.NumPlayers) != 11 || keepers.size() < 2 || defense.size() < 8 || midfield.size() < 8){
+			throw new RuntimeException("Not enough players");
 		}
 
 

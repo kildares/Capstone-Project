@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,8 +123,14 @@ public class PickTeamFragment extends Fragment {
         RadioButton by_position = getActivity().findViewById(R.id.rb_position);
         try{
             if(selectedId == by_position.getId()){
-                mMatch.pickTeamsByPosition();
-                mTeamPicked = TEAM_PICKED_POSITION;
+                try{
+                    mMatch.pickTeamsByPosition();
+                    mTeamPicked = TEAM_PICKED_POSITION;
+                }catch(RuntimeException e){
+                    String message = getActivity().getString(R.string.error_pick_team_unavailable);
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                    Log.w("Pick Team", message);
+                }
             }
             else{
                 mMatch.pickTeamsRandomly();

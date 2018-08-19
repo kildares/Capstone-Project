@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.time.LocalDate;
+
 import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.model.Match;
 import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
@@ -83,17 +85,51 @@ public class CreateMatchFragment extends Fragment {
 			String title = mMatchTitle.getText().toString();
 			String location = mMatchLocation.getText().toString();
 			String date = mMatchDate.getText().toString();
-			if(!title.isEmpty() && !location.isEmpty() && !date.isEmpty() && isValidMinPlayers() && isValidMaxPlayers()){
+			if(isValidTitle(title) && isValidLocation(location) && isValidDate(date) && isValidMinPlayers() && isValidMaxPlayers()){
 				createMatch();
                 mListener.onMatchCreated();
 			}
 			else{
 				Log.i(LOG_TAG ,"Unable to create match");
-				Toast.makeText(getActivity(),getActivity().getString(R.string.toast_missing_field),Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(),getActivity().getString(R.string.toast_missing_field),Toast.LENGTH_SHORT).show();
 			}
 		});
 
         return view;
+    }
+
+    public boolean isValidTitle(String title){
+
+        if(title.isEmpty())
+            return false;
+        if(title.length() < 5){
+            Toast.makeText(getActivity(),getActivity().getString(R.string.match_title_length_too_small),Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidLocation(String location){
+        if(location.isEmpty())
+            return false;
+        if(location.length() < 5){
+            Toast.makeText(getActivity(),getActivity().getString(R.string.match_location_length_too_small),Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidDate(String date){
+        if(date.length() != 8)
+            return false;
+
+        Integer day = Integer.parseInt(date.substring(0,2));
+        Integer month = Integer.parseInt(date.substring(3,5));
+        Integer year = Integer.parseInt(date.substring(6,8));
+        if(day == null || month == null || year == null)
+            return false;
+        LocalDate convertedDate = LocalDate.of(day, month, year);
+        return convertedDate != null;
     }
 
     @Override

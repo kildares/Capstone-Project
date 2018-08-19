@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,7 @@ public class MatchListFragment extends Fragment implements MatchAdapter.OnMatchI
     private FloatingActionButton mFab;
     private MatchListFragmentInteraction mListener;
     private MatchAdapter mAdapter;
+    private TextView mNoMatches;
 
     public MatchListFragment() {
         // Required empty public constructor
@@ -66,6 +69,8 @@ public class MatchListFragment extends Fragment implements MatchAdapter.OnMatchI
         View view = inflater.inflate(R.layout.fragment_match_list, container, false);
         mRVMatches = view.findViewById(R.id.rv_match_list);
         mFab = view.findViewById(R.id.fab_create_match);
+        mNoMatches = view.findViewById(R.id.tv_loading);
+
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +88,19 @@ public class MatchListFragment extends Fragment implements MatchAdapter.OnMatchI
         FutMatcherFirebaseDatabase.getInstance().addChildEventListenerToReference(eventListener);
 
         mRVMatches.setAdapter(mAdapter);
+
+        showNoMatch();
         return view;
+    }
+
+    public void showNoMatch(){
+        mRVMatches.setVisibility(View.INVISIBLE);
+        mNoMatches.setVisibility(View.VISIBLE);
+    }
+
+    public void showMatches(){
+        mRVMatches.setVisibility(View.VISIBLE);
+        mNoMatches.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -102,6 +119,15 @@ public class MatchListFragment extends Fragment implements MatchAdapter.OnMatchI
     public void onClickMatchItem(Match match) {
         if(mListener != null)
             mListener.onClickMatchItem(match);
+    }
+
+    @Override
+    public void onMatchesAvailable(int numMatches) {
+        if( numMatches == 0){
+            showNoMatch();
+        }
+        else
+            showMatches();
     }
 
     public interface MatchListFragmentInteraction{
