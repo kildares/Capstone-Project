@@ -28,7 +28,6 @@ import futmatcher.kildare.com.futmatcher.dialoginterface.EditPlayerOnClickListen
 import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseChildEventFactory;
 import futmatcher.kildare.com.futmatcher.R;
 import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebaseEventListener;
-import futmatcher.kildare.com.futmatcher.firebaselistenerfactory.FirebasePlayerEventListener;
 import futmatcher.kildare.com.futmatcher.model.Match;
 import futmatcher.kildare.com.futmatcher.model.Player;
 import futmatcher.kildare.com.futmatcher.persistence.FutMatcherFirebaseDatabase;
@@ -122,6 +121,9 @@ public class MatchDetailsFragment extends Fragment implements View.OnClickListen
                 android.app.AlertDialog dialog = builder.create();
                 LayoutInflater inflater = dialog.getLayoutInflater();
                 View dialogView = inflater.inflate(R.layout.add_player_alert_dialog, frameLayout);
+                EditText playerName = dialogView.findViewById(R.id.et_add_player_name);
+                playerName.setText(mPlayerListAdapter.getItem(position));
+                listener.setPlayerNameView(playerName);
                 dialog.show();
 
             }

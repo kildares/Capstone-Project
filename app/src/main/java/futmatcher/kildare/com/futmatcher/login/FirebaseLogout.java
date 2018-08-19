@@ -10,7 +10,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import futmatcher.kildare.com.futmatcher.LoginActivity;
-import futmatcher.kildare.com.futmatcher.MainActivity;
+import futmatcher.kildare.com.futmatcher.R;
 
 public class FirebaseLogout {
 
@@ -19,7 +19,7 @@ public class FirebaseLogout {
 		AuthUI.getInstance().signOut(context).addOnCompleteListener(new OnCompleteListener<Void>() {
 			@Override
 			public void onComplete(@NonNull Task<Void> task) {
-				Toast.makeText(context, "Signed out successfully", Toast.LENGTH_LONG).show();
+				Toast.makeText(context, context.getString(R.string.logout_toast_message), Toast.LENGTH_LONG).show();
 				Intent intent = new Intent(context, LoginActivity.class);
 				context.startActivity(intent);
 			}

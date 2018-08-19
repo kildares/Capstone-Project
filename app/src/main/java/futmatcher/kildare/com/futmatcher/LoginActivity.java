@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if(requestCode == RC_SIGN_IN){
-			IdpResponse response = IdpResponse.fromResultIntent(data);
 
 			if(resultCode == RESULT_OK){
 				Intent intent = new Intent(this, MainActivity.class);
@@ -56,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 			}
 			else{
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
-				AlertDialog dialog = builder.setTitle("Sorry, we could not login. Please try again.\n").create();
+				AlertDialog dialog = builder.setTitle(getString(R.string.login_error_message)).create();
 				dialog.show();
 			}
 		}

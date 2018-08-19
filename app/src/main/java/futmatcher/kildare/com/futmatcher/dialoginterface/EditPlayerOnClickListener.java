@@ -1,6 +1,7 @@
 package futmatcher.kildare.com.futmatcher.dialoginterface;
 
 import android.content.DialogInterface;
+import android.widget.EditText;
 
 import futmatcher.kildare.com.futmatcher.dialoginterface.EditPlayerInterface;
 import futmatcher.kildare.com.futmatcher.model.Player;
@@ -13,6 +14,7 @@ public class EditPlayerOnClickListener implements DialogInterface.OnClickListene
 
 	private Player mPlayer;
 	EditPlayerInterface mListener;
+	EditText mPlayerNameView;
 
 	public EditPlayerOnClickListener(EditPlayerInterface listener, Player player){
 		mPlayer = player;
@@ -23,6 +25,7 @@ public class EditPlayerOnClickListener implements DialogInterface.OnClickListene
 	public void onClick(DialogInterface dialogInterface, int i) {
 		switch(i){
 			case DialogInterface.BUTTON_POSITIVE:{
+				mPlayer.setName(mPlayerNameView.getText().toString());
 				mListener.editPlayer(mPlayer);
 				dialogInterface.dismiss();
 				break;
@@ -34,6 +37,10 @@ public class EditPlayerOnClickListener implements DialogInterface.OnClickListene
 			}
 
 		}
+	}
+
+	public void setPlayerNameView(EditText view){
+		mPlayerNameView = view;
 	}
 
 }
